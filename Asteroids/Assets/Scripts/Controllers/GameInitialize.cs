@@ -1,8 +1,4 @@
 using Controller;
-
-using PlayerInput;
-using Game.Profiles;
-
 using ScriptableObjectData;
 using System.Linq;
 using UnityEngine;
