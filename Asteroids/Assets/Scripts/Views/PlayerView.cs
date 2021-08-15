@@ -22,7 +22,13 @@ namespace View
         }
 
         public void Move(Vector2 direction) => _rigidbody.AddForce(direction);
-        public void Rotate(Vector2 rotation) => transform.Rotate(rotation, Space.Self);
+        public void SetLook(Vector2 point)
+        {
+            var target = new Vector3(point.x, point.y, 0);
+            Vector3 dir = target - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
 
 
 

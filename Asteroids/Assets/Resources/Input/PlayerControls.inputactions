@@ -7,10 +7,10 @@
             "actions": [
                 {
                     "name": "Movement",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "2c5ad739-4bea-4ebc-bba9-71bd14d00eff",
-                    "expectedControlType": "Button",
-                    "processors": "Normalize(min=-1,max=1)",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
                     "interactions": ""
                 },
                 {
@@ -56,7 +56,7 @@
                 {
                     "name": "2D Vector",
                     "id": "2d62d10d-0242-452d-b50e-acc6c3e45c85",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -104,6 +104,61 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "New control scheme",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "0b9b97f5-60be-4ba2-b2d8-022b4d4f916c",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "d1947480-a7a3-4460-848e-f97137a49d94",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "3405c535-1bd4-462d-8d6f-6f669be02350",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "d8161be1-0406-4d73-84ba-bef74b3b2c33",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "0af9b032-c12e-4380-a4d2-bb0961d84bd8",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true

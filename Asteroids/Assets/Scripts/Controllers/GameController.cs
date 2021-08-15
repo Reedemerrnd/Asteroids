@@ -8,7 +8,7 @@ namespace Controller
     {
         #region Fields
 
-        [SerializeField] private Data data;
+        
 
         private Controllers _controllers;
 
@@ -20,7 +20,7 @@ namespace Controller
         private void Start()
         {
             _controllers = new Controllers();
-            new GameInitialize(_controllers, data);
+            new GameInitialize(_controllers);
             _controllers.Initialize();
             _controllers.AddGameStateHandlers();
         }
