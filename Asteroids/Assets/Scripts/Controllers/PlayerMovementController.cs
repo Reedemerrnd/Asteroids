@@ -7,28 +7,31 @@ using Controller;
 using UnityEngine;
 using View;
 using Inputs;
+using Model;
 
 namespace Controller
 {
     class PlayerMovementController : IController, IFixedExecute, IExecute
     {
-        private IFullMove _playerView;
-        private IInput _input;
+        private readonly IFullMove _playerView;
+        private readonly IInput _input;
+        private readonly IFullMoveModel _playerModel;
 
-        public PlayerMovementController(IFullMove playerView, IInput input)
+        public PlayerMovementController(IFullMove playerView, IInput input, IFullMoveModel playerModel)
         {
             _playerView = playerView;
             _input = input;
+            _playerModel = playerModel;
         }
 
         public void FixedExecute()
         {
-            _playerView.Move(_input.Axes * 10f);
+            _playerView.Move(_input.Thrust, _playerModel.Speed);
         }
 
         public void Execute()
         {
-            _playerView.SetLook(_input.MousePosition);
+            _playerView.SetRotation(_input.Rotation, _playerModel.RotationSpeed);
         }
     }
 }

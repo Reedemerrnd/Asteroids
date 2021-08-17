@@ -4,6 +4,6 @@ namespace View
 {
     public interface IMove
     {
-        public void Move(Vector2 direction);
+        public void Move(float axis, float speed);
     }
 }

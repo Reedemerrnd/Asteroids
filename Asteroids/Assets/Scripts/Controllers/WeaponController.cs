@@ -26,7 +26,7 @@ namespace Controller
             foreach (var muzzle in _view.MuzzlesTransform)
             {
                 var bullet = GameObject.Instantiate(_weapon.BulletPrefab, muzzle.position, muzzle.rotation);
-                bullet.GetComponent<IBullet>().Fire();
+                bullet.GetComponent<IBullet>().Fire(muzzle.right, 1000);
                 GameObject.Destroy(bullet, 4f);
             }
         }

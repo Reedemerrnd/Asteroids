@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace View
-{ 
-    public interface IBullet
+namespace Model
+{
+    public interface IFullMoveModel : IRotateModel, IMoveModel
     {
-        public void Fire(float power = 0);
     }
 }

@@ -4,6 +4,6 @@ namespace View
 {
     public interface IRotate
     {
-        public void SetLook(Vector2 rotation);
+        public void SetRotation(float axis, float speed);
     }
 }

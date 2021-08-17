@@ -6,10 +6,10 @@ namespace View
 {
     public class Bullet : MonoBehaviour, IBullet
     {
-        public void Fire(float power = 1)
+        public void Fire(Vector3 direction, float power = 100)
         {
             TryGetComponent<Rigidbody2D>(out var rigidbody);
-            rigidbody.AddForce(Vector2.up * power);
+            rigidbody.AddForce(direction * power);
         }
     }
 }
