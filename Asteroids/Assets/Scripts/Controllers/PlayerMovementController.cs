@@ -28,7 +28,6 @@ namespace Controller
 
         public void Execute()
         {
-            Debug.Log(_input.MousePosition);
             _playerView.SetLook(_input.MousePosition);
         }
     }

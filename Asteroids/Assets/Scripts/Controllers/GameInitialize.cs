@@ -13,9 +13,11 @@ namespace Game
         {
             var input = new PCInput();
             var playerView = GameObject.FindObjectOfType<PlayerView>();
+            var weaponModel = new PrimaryWeapon();
 
             controllers
-                 .Add(new PlayerMovementController(playerView, input));
+                 .Add(new PlayerMovementController(playerView, input))
+                 .Add(new WeaponController(playerView, weaponModel, input));
 
         }
     }

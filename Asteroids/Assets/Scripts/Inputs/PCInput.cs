@@ -15,8 +15,9 @@ namespace Inputs
         private InputAction _movement;
         private InputAction _fire;
 
-        public Vector2 MousePosition => _mousePos.ReadValue<Vector2>();
+        public Vector2 MousePosition => Camera.main.ScreenToWorldPoint(_mousePos.ReadValue<Vector2>());
         public Vector2 Axes => _movement.ReadValue<Vector2>();
+        
 
         public PCInput()
         {
@@ -26,6 +27,7 @@ namespace Inputs
             _fire = _actions.FindAction("Fire");
             _movement = _actions.FindAction("Movement");
             _mousePos = _actions.FindAction("Rotation");
+            _fire.started += (e) => OnFire?.Invoke();
         }
         
     }
