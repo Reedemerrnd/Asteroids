@@ -1,10 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-namespace View
+namespace Asteroids.Views
 {
     public interface IColliderInteraction
     {
-        public event Action<Collider2D> OnColliderInteraction;
+        public void Interaction();
     }
 }

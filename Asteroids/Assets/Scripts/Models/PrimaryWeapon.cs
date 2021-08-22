@@ -1,28 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
-using View;
+using Asteroids.Data;
+using Asteroids.Views;
 using UnityEngine;
 
-namespace Game
+namespace Asteroids.Models
 {
-    //extract loading resources
     public class PrimaryWeapon : IWeaponModel
     {
-        private GameObject _bulletPrefab;
-        private int _damage = 3;
-        private float _fireRate = 2f;
-        private const string PREFABPATH = @"Weapons/bullet";
+        private int _damage;
+        private float _fireRate;
+        private readonly float _firePower;
 
         public int Damage => _damage;
 
         public float FireRate => _fireRate;
-
-        public GameObject BulletPrefab => _bulletPrefab;
-
-        public PrimaryWeapon()
+        public float FirePower => _firePower;
+        public PrimaryWeapon(IWeaponData data)
         {
-            //replace w/ pool/factory
-            _bulletPrefab = Resources.Load<Bullet>(PREFABPATH).gameObject;
+            _damage = data.Damage;
+            _fireRate = data.FireRate;
+            _firePower = data.FirePower;
         }
+
     }
 }

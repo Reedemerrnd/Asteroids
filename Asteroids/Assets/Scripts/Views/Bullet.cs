@@ -1,15 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace View
+namespace Asteroids.Views
 {
-    public class Bullet : MonoBehaviour, IBullet
+    public sealed class Bullet : BaseAmunition
     {
-        public void Fire(Vector3 direction, float power = 100)
+        public override void Interaction()
         {
-            TryGetComponent<Rigidbody2D>(out var rigidbody);
-            rigidbody.AddForce(direction * power);
+            Deactivate();
         }
     }
 }

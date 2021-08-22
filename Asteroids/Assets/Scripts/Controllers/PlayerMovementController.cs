@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Controller;
 using UnityEngine;
-using View;
+using Asteroids.Views;
 using Inputs;
-using Model;
+using Asteroids.Models;
 
 namespace Controller
 {

@@ -1,7 +1,7 @@
 
-namespace View
+namespace Asteroids.Views
 {
-    public interface IPlayerVIew : IFullMove, IShoot, IColliderInteraction
+    public interface IPlayerView : IFullMove, IShoot, IColliderInteraction
     {
 
     }

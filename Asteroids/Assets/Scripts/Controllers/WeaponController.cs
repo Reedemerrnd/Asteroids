@@ -1,7 +1,9 @@
 ﻿using System;
-using View;
-using Game;
+using Asteroids.Views;
+using Asteroids;
 using Inputs;
+using Asteroids.Models;
+using Asteroids.Data;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -13,21 +15,25 @@ namespace Controller
         private IShoot _view;
         private IWeaponModel _weapon;
         private IInput _input;
+        private IPool _ammoPool;
 
-        public WeaponController(IShoot view, IWeaponModel weapon, IInput input)
+        public WeaponController(IShoot view, IWeaponModel weapon, IInput input, IPool ammoPool)
         {
             _view = view;
             _weapon = weapon;
             _input = input;
+            _ammoPool = ammoPool;
         }
 
+        // Inplement firerate
         private void Shoot()
         {
             foreach (var muzzle in _view.MuzzlesTransform)
             {
-                var bullet = GameObject.Instantiate(_weapon.BulletPrefab, muzzle.position, muzzle.rotation);
-                bullet.GetComponent<IBullet>().Fire(muzzle.right, 1000);
-                GameObject.Destroy(bullet, 4f);
+                var bullet = _ammoPool.GetItem().Self;
+                bullet.transform.position = muzzle.transform.position;
+                bullet.transform.rotation = muzzle.rotation;
+                bullet.GetComponent<Bullet>().Move(1f, _weapon.FirePower);
             }
         }
 

@@ -1,23 +1,38 @@
 using Controller;
 using Inputs;
 using System.Linq;
-using Model;
-using View;
+using Asteroids.Models;
+using Asteroids.Data;
+using Asteroids.Views;
 using UnityEngine;
 
-namespace Game
+namespace Asteroids
 {
     public class GameInitialize
     {
         public GameInitialize(Controllers controllers)
         {
+            var dataLoader = new ScriptabeObjectDataLoader();
+
+            var shipFactory = new ShipFactory(dataLoader);
+            shipFactory.Init(PlayerShip.Base);
+            var enemyFactory = new EnemyInitializer(dataLoader);
+            enemyFactory.Init(EnemyType.Asteroid);
+
+            var weaponData = dataLoader.LoadWeapon(WeaponType.Base);
+            var enemyData = dataLoader.LoadEnemy(EnemyType.Asteroid);
+
+            var mainWeaponAmmoPool = new Pool(weaponData.AmmoPrefab.GetComponent<IPoolObject>());
+            var asteroidPool = enemyFactory.GetViewsPool();
+
             var input = new PCInput();
-            var playerView = GameObject.FindObjectOfType<PlayerView>();
-            var weaponModel = new PrimaryWeapon();
-            var playerModel = new ShipModel(100, 10f, 0.3f);
+            var playerView = shipFactory.GetView();
+            var weaponModel = new PrimaryWeapon(weaponData);
+            var playerModel = shipFactory.GetModel();
 
             controllers.Add(new PlayerMovementController(playerView, input, playerModel))
-                       .Add(new WeaponController(playerView, weaponModel, input));
+                       .Add(new WeaponController(playerView, weaponModel, input, mainWeaponAmmoPool))
+                       .Add(new EnemyMovementController(asteroidPool));
 
         }
     }
