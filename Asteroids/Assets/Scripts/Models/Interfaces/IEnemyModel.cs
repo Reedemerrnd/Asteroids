@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Asteroids.Models
 {
-    internal interface IEnemyModel : IHealthModel, IMoveModel, IDoDamage
+    public interface IEnemyModel : IHealthModel, IMoveModel, IDoDamage
     {
         public EnemyType enemyType { get; }
     }

@@ -8,8 +8,9 @@ using UnityEngine;
 
 namespace Asteroids.Data
 {
-    internal class Pool : IPool
+    internal class Pool : IPool, IPoolItemAdded
     {
+        public event Action<GameObject> OnPoolElementAdded;
         IPoolObject _poolObject;
 
         private Stack<IPoolObject> _poolStack;
@@ -24,6 +25,7 @@ namespace Asteroids.Data
             if (_poolStack.Count == 0)
             {
                 result = GameObject.Instantiate(_poolObject.Self).GetComponent<IPoolObject>();
+                OnPoolElementAdded?.Invoke(result.Self);
             }
             else
             {
@@ -34,5 +36,6 @@ namespace Asteroids.Data
         }
 
         public void ReturnToPoll(IPoolObject item) => _poolStack.Push(item);
+
     }
 }

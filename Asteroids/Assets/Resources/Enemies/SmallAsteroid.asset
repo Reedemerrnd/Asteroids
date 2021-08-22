@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed68e9db7502d534386605fa4c1f8a75, type: 3}
-  m_Name: Asteroid
+  m_Name: SmallAsteroid
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 7433764594858399906, guid: 633f7033a9d0f1a4eae9d8d5542d3ec9, type: 3}
-  _speed: 500
-  _type: 1
-  _maxHealth: 20
-  _damage: 5
+  _prefab: {fileID: 7433764594858399906, guid: 774787a82f27c1f44bedc28413c9c4ba, type: 3}
+  _speed: 1000
+  _type: 3
+  _maxHealth: 10
+  _damage: 10

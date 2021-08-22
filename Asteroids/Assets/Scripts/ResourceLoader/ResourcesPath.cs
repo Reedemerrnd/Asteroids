@@ -19,6 +19,9 @@ namespace Asteroids.Data
             },
             {
                 EnemyType.SmallShip,$@"Enemies/{EnemyType.SmallShip}"
+            },
+                        {
+                EnemyType.SmallAsteroid,$@"Enemies/{EnemyType.SmallAsteroid}"
             }
         };
 

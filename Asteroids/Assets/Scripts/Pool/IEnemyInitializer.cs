@@ -7,10 +7,10 @@ using Asteroids.Models;
 
 namespace Asteroids.Data
 {
-    internal interface IEnemyInitializer
+    public interface IEnemyInitializer
     {
         public IEnemyInitializer Init(EnemyType type);
         public IPoolSet<EnemyType> GetViewsPool();
-        public Dictionary<EnemyType, IEnemyModel> GetModels();
+        public IEnemyModelSet GetModels();
     }
 }

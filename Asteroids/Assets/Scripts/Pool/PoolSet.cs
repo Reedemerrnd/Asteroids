@@ -29,5 +29,10 @@ namespace Asteroids.Data
             item = null;
             return false;
         }
+        public bool TryGetItem<K>(T type, out K item)
+        {
+            TryGetItem(type, out var result);
+            return result.TryGetComponent<K>(out item);
+        }
     }
 }

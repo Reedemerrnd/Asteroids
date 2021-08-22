@@ -4,6 +4,7 @@
     {
         None = 0,
         Asteroid = 1,
-        SmallShip = 2
+        SmallShip = 2,
+        SmallAsteroid = 3
     }
 }

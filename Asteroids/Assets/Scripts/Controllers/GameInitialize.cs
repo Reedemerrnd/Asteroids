@@ -16,23 +16,25 @@ namespace Asteroids
 
             var shipFactory = new ShipFactory(dataLoader);
             shipFactory.Init(PlayerShip.Base);
-            var enemyFactory = new EnemyInitializer(dataLoader);
-            enemyFactory.Init(EnemyType.Asteroid);
+
+            var enemyInitializer = new EnemyInitializer(dataLoader);
+            enemyInitializer.Init(EnemyType.Asteroid)
+                            .Init(EnemyType.SmallAsteroid);
+            var enemyModels = enemyInitializer.GetModels();
+            var enemyPool = enemyInitializer.GetViewsPool();
+            var enemyspawnModel = new EnemySpawnModel();
 
             var weaponData = dataLoader.LoadWeapon(WeaponType.Base);
-            var enemyData = dataLoader.LoadEnemy(EnemyType.Asteroid);
-
             var mainWeaponAmmoPool = new Pool(weaponData.AmmoPrefab.GetComponent<IPoolObject>());
-            var asteroidPool = enemyFactory.GetViewsPool();
+            var weaponModel = new PrimaryWeapon(weaponData);
 
             var input = new PCInput();
             var playerView = shipFactory.GetView();
-            var weaponModel = new PrimaryWeapon(weaponData);
             var playerModel = shipFactory.GetModel();
 
             controllers.Add(new PlayerMovementController(playerView, input, playerModel))
                        .Add(new WeaponController(playerView, weaponModel, input, mainWeaponAmmoPool))
-                       .Add(new EnemyMovementController(asteroidPool));
+                       .Add(new EnemyMovementController(enemyPool,enemyModels, enemyspawnModel));
 
         }
     }

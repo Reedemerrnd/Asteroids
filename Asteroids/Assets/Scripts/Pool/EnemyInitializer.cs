@@ -8,17 +8,17 @@ using Asteroids.Models;
 
 namespace Asteroids.Data
 {
-    class EnemyInitializer : IEnemyInitializer
+    public class EnemyInitializer : IEnemyInitializer
     {
         private IDataLoader _dataLoader;
         private PoolSet<EnemyType> _pool;
-        private Dictionary<EnemyType, IEnemyModel> _models;
+        private EnemyModelSet _models;
 
         public EnemyInitializer(IDataLoader dataLoader = null)
         {
             _dataLoader = dataLoader;
             _pool = new PoolSet<EnemyType>();
-            _models = new Dictionary<EnemyType, IEnemyModel>();
+            _models = new EnemyModelSet();
         }
 
         public IEnemyInitializer Init(EnemyType type)
@@ -31,6 +31,6 @@ namespace Asteroids.Data
         }
 
         public IPoolSet<EnemyType> GetViewsPool() => _pool;
-        public Dictionary<EnemyType, IEnemyModel> GetModels() => _models;
+        public IEnemyModelSet GetModels() => _models;
     }
 }

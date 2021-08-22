@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Asteroids.Data;
 using UnityEngine;
 
-namespace Asteroids.Views
+namespace Asteroids.Data
 {
-    public abstract class BaseAmunition : InteractiveObject
+    interface IPoolItemAdded
     {
-        
+        public event Action<GameObject> OnPoolElementAdded;
     }
 }
-

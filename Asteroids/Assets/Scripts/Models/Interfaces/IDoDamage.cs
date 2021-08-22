@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Asteroids.Models
 {
-    internal interface IDoDamage
+    public interface IDoDamage
     {
         public int Damage { get; }
     }
