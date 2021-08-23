@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Controller
 {
-    public class EnemyMovementController : IController, IInitialize, IExecute
+    public class EnemySpawnController : IController, IInitialize, IExecute
     {
         private IPoolSet<EnemyType> _enemyPool;
         private IEnemyModelSet _enemyModels;
@@ -19,7 +19,7 @@ namespace Controller
 
 
 
-        public EnemyMovementController(IPoolSet<EnemyType> enemyPool, IEnemyModelSet enemyModels, IEnemySpawnModel spawnModel)
+        public EnemySpawnController(IPoolSet<EnemyType> enemyPool, IEnemyModelSet enemyModels, IEnemySpawnModel spawnModel)
         {
             _enemyPool = enemyPool;
             _enemyModels = enemyModels;
@@ -30,6 +30,11 @@ namespace Controller
         {
             _enemyPool.TryGetItem(type, out var enemy);
             var position = _spawnModel.GetSpawnPoint();
+
+            //временный вечный костыль инициализации ХП в модели, знаю что плохо не придумал альтернативы
+            var enemyHealth = enemy.GetComponent<IEnemy>();
+            enemyHealth.Health = _enemyModels[enemyHealth.Type].Health;
+
             enemy.transform.position = position;
             enemy.GetComponent<IMove>().Move(AxisManager.POSITIVE, _enemyModels[type].Speed);
         }
@@ -37,7 +42,7 @@ namespace Controller
         private void SpawnEnemy()
         {
             var keys = _enemyModels.Keys;
-            var random = Mathf.RoundToInt(Randomize(0, keys.Length));
+            var random = Mathf.RoundToInt(Randomize(0, keys.Length-1));
             LaunchEnemy(keys[random]);
         }
 
@@ -49,6 +54,7 @@ namespace Controller
             var delay = Randomize(_spawnModel.MinDelay, _spawnModel.MaxDelay);
             if(_time+delay <= Time.time)
             {
+                SpawnEnemy();
                 SpawnEnemy();
                 _time = Time.time;
             }

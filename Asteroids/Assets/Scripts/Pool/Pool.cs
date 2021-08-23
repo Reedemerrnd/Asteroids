@@ -24,8 +24,13 @@ namespace Asteroids.Data
             IPoolObject result;
             if (_poolStack.Count == 0)
             {
-                result = GameObject.Instantiate(_poolObject.Self).GetComponent<IPoolObject>();
-                OnPoolElementAdded?.Invoke(result.Self);
+                var obj = GameObject.Instantiate(_poolObject.Self);
+                if (obj != null)
+                {
+                    OnPoolElementAdded?.Invoke(obj);
+                }
+                result = obj.GetComponent<IPoolObject>();
+
             }
             else
             {

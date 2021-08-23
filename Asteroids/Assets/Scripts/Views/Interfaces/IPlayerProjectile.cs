@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Asteroids.Views
 {
-    public interface IDoDamage
+    public interface IPlayerProjectile : IDoDamage
     {
-        public int Damage { get; set; }
     }
 }

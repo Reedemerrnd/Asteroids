@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Asteroids.Data;
 
 namespace Asteroids.Views
 {
-    public interface IDoDamage
+    public interface IEnemy : IEnemyHealth
     {
-        public int Damage { get; set; }
+        public EnemyType Type { get;}
     }
 }

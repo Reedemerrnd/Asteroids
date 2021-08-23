@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Asteroids.Views
 {
-    public interface IDoDamage
+    //каким-нибудь образом заменить
+    public interface IEnemyHealth 
     {
-        public int Damage { get; set; }
+        public int Health { get; set; }
     }
 }

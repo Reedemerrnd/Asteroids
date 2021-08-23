@@ -22,7 +22,6 @@ namespace Asteroids
                             .Init(EnemyType.SmallAsteroid);
             var enemyModels = enemyInitializer.GetModels();
             var enemyPool = enemyInitializer.GetViewsPool();
-            var enemyViewsList = new SpawnedPoolObjectsList<EnemyType>(enemyPool);
             var enemyspawnModel = new EnemySpawnModel();
 
             var weaponData = dataLoader.LoadWeapon(WeaponType.Base);
@@ -35,7 +34,9 @@ namespace Asteroids
 
             controllers.Add(new PlayerMovementController(playerView, input, playerModel))
                        .Add(new WeaponController(playerView, weaponModel, input, mainWeaponAmmoPool))
-                       .Add(new EnemyMovementController(enemyPool,enemyModels, enemyspawnModel));
+                       .Add(new EnemySpawnController(enemyPool,enemyModels, enemyspawnModel))
+                       .Add(new DamageController(enemyModels, enemyPool, playerView, playerModel))
+                       ;
 
         }
     }

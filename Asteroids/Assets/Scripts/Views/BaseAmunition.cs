@@ -10,9 +10,8 @@ namespace Asteroids.Views
 {
     public abstract class BaseAmunition : InteractiveObject
     {
-        protected override void Interaction(GameObject target)
+        protected override void Interaction(Collider2D other)
         {
-            base.Interaction(target);
             Destroy();
         }
     }

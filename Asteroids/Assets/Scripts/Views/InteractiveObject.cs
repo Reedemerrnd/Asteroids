@@ -8,9 +8,8 @@ using UnityEngine;
 
 namespace Asteroids.Views
 {
-    public abstract class InteractiveObject : BaseRigidbodyMovingView, IPoolObject, IInteractable, IDestroyable
+    public abstract class InteractiveObject : BaseRigidbodyMovingView, IPoolObject, IDestroyable
     {
-        public event Action<GameObject, GameObject> OnInteraction;
         [SerializeField] private int _lifeTime;
 
         public int Damage { get; set; }
@@ -21,15 +20,13 @@ namespace Asteroids.Views
         private IPool _pool;
 
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            Interaction(other.gameObject);
+            Interaction(other);
         }
+        protected abstract void Interaction(Collider2D other);
 
-        protected virtual void Interaction(GameObject target)
-        {
-            OnInteraction?.Invoke(gameObject, target);
-        }
+
         public IPoolObject Activate()
         {
             gameObject.SetActive(true);

@@ -26,20 +26,59 @@ namespace Controller
             _playerModel = playerModel;
         }
 
-
+        private void ProcessEnemyDamage(GameObject obj, int damage)
+        {
+            if(obj.TryGetComponent<IEnemy>(out var enemyHealth))
+            {
+                enemyHealth.Health -= damage;
+                Debug.Log($"Enemy {enemyHealth.Health}");
+            }
+        }
+        private void ProcessPlayerDamage(GameObject obj, int damage)
+        {
+            if(obj.TryGetComponent<IEnemy>(out var enemy))
+            {
+                _playerModel.Health -= _enemyModels[enemy.Type].Damage;
+                Debug.Log($"Player {_playerModel.Health}");
+            }
+        }
+        private void Add(GameObject obj)
+        {
+            _views.Add(obj);
+            if(obj.TryGetComponent<ITakeDamage>(out var interactable))
+            {
+                interactable.OnDamageTaken += ProcessEnemyDamage;
+            }
+        }
         public void Init()
         {
-            foreach (var pool in _viewPool.GetActivePools())
-            {
-                if(pool is IPoolItemAdded poolItemAdded)
-                {
-                    poolItemAdded.OnPoolElementAdded += _views.Add;
-                }
-            }
+            //foreach (var pool in _viewPool.GetActivePools())
+            //{
+            //    if(pool is IPoolItemAdded poolItemAdded)
+            //    {
+            //        poolItemAdded.OnPoolEle
+            //        ,mentAdded += Add;
+            //    }
+            //}
+            _playerView.OnDamageTaken += ProcessPlayerDamage;
         }
         public void Disable()
         {
-            
+            _playerView.OnDamageTaken -= ProcessPlayerDamage;
+            //foreach (var item in _views)
+            //{
+            //    if (item.TryGetComponent<ITakeDamage>(out var damageTaker))
+            //    {
+            //        damageTaker.OnDamageTaken -= ProcessEnemyDamage;
+            //    }
+            //}
+            //foreach (var pool in _viewPool.GetActivePools())
+            //{
+            //    if (pool is IPoolItemAdded poolItemAdded)
+            //    {
+            //        poolItemAdded.OnPoolElementAdded += Add;
+            //    }
+            //}
         }
     }
 }
