@@ -10,5 +10,7 @@ namespace Asteroids.Data
     public interface IPoolSet<T> where T : Enum
     {
         public bool TryGetItem(T Type, out GameObject item);
+        public bool TryGetItem<K>(T Type, out K item);
+        public IPool[] GetActivePools();
     }
 }

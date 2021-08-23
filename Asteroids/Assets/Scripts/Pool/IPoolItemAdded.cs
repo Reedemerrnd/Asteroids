@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Asteroids.Data
 {
-    interface IPoolItemAdded
+    public interface IPoolItemAdded
     {
         public event Action<GameObject> OnPoolElementAdded;
     }

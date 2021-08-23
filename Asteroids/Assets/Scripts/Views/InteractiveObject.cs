@@ -23,9 +23,13 @@ namespace Asteroids.Views
 
         private void OnTriggerEnter(Collider other)
         {
-            OnInteraction?.Invoke(gameObject, other.gameObject);
+            Interaction(other.gameObject);
         }
 
+        protected virtual void Interaction(GameObject target)
+        {
+            OnInteraction?.Invoke(gameObject, target);
+        }
         public IPoolObject Activate()
         {
             gameObject.SetActive(true);

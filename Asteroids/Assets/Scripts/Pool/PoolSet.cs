@@ -19,6 +19,9 @@ namespace Asteroids.Data
         {
             _set.Add(type, pool);
         }
+
+
+        public IPool[] GetActivePools() => _set.Values.ToArray();
         public bool TryGetItem(T type, out GameObject item)
         {
             if (_set.ContainsKey(type))

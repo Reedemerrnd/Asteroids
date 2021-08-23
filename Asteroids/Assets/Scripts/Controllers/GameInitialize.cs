@@ -22,6 +22,7 @@ namespace Asteroids
                             .Init(EnemyType.SmallAsteroid);
             var enemyModels = enemyInitializer.GetModels();
             var enemyPool = enemyInitializer.GetViewsPool();
+            var enemyViewsList = new SpawnedPoolObjectsList<EnemyType>(enemyPool);
             var enemyspawnModel = new EnemySpawnModel();
 
             var weaponData = dataLoader.LoadWeapon(WeaponType.Base);

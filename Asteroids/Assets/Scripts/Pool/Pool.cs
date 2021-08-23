@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Asteroids.Data
 {
-    internal class Pool : IPool, IPoolItemAdded
+    public class Pool : IPool, IPoolItemAdded
     {
         public event Action<GameObject> OnPoolElementAdded;
         IPoolObject _poolObject;
