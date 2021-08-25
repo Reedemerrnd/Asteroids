@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Asteroids.Assets.Scripts.Views.Interfaces
+namespace Asteroids.Views
 {
-    public interface ITakeEnemyDamage
+    public interface ITakeEnemyDamage : ITakeDamage
     {
-
+        public event Action<int> OnDamageTaken;
     }
+
 }

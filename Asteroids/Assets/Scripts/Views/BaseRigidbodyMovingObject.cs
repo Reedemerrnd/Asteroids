@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Asteroids.Views
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public abstract class BaseRigidbodyMovingView : MonoBehaviour , IMove
+    public abstract class BaseRigidbodyMovingObject : MonoBehaviour , IMove
     {
         private Rigidbody2D _rigidbody;
         private void Awake()

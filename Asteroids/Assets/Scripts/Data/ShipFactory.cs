@@ -17,7 +17,7 @@ namespace Asteroids.Data
         {
         }
 
-        public void Init(PlayerShip playerShip)
+        public void SetShip(PlayerShip playerShip)
         {
             _data = _dataLoader.LoadShip(playerShip);
         }

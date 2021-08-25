@@ -23,7 +23,6 @@ namespace Controller
             new GameInitialize(_controllers);
             _controllers.Initialize();
             _controllers.AddGameStateHandlers();
-            Debug.Log(EnemyType.Asteroid);
         }
 
         private void Update()

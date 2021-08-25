@@ -20,8 +20,6 @@ namespace Asteroids.Data
             _set.Add(type, pool);
         }
 
-
-        public IPool[] GetActivePools() => _set.Values.ToArray();
         public bool TryGetItem(T type, out GameObject item)
         {
             if (_set.ContainsKey(type))
@@ -31,11 +29,6 @@ namespace Asteroids.Data
             }
             item = null;
             return false;
-        }
-        public bool TryGetItem<K>(T type, out K item)
-        {
-            TryGetItem(type, out var result);
-            return result.TryGetComponent<K>(out item);
         }
     }
 }

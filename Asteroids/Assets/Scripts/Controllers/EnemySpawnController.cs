@@ -31,7 +31,6 @@ namespace Controller
             _enemyPool.TryGetItem(type, out var enemy);
             var position = _spawnModel.GetSpawnPoint();
 
-            //временный вечный костыль инициализации ХП в модели, знаю что плохо не придумал альтернативы
             var enemyHealth = enemy.GetComponent<IEnemy>();
             enemyHealth.Health = _enemyModels[enemyHealth.Type].Health;
 

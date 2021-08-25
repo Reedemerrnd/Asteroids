@@ -8,29 +8,26 @@ using Asteroids.Models;
 
 namespace Asteroids.Data
 {
-    public class EnemyInitializer : IEnemyInitializer
+    internal class EnemyFactory : AbstractFactory<IEnemyModelSet,IPoolSet<EnemyType>>
     {
-        private IDataLoader _dataLoader;
-        private PoolSet<EnemyType> _pool;
+        private PoolSet<EnemyType> _poolSet;
         private EnemyModelSet _models;
 
-        public EnemyInitializer(IDataLoader dataLoader = null)
+        public EnemyFactory(IDataLoader dataLoader) : base(dataLoader)
         {
-            _dataLoader = dataLoader;
-            _pool = new PoolSet<EnemyType>();
+            _poolSet = new PoolSet<EnemyType>();
             _models = new EnemyModelSet();
         }
 
-        public IEnemyInitializer Init(EnemyType type)
+        public  void Init(EnemyType type)
         {
             var data = _dataLoader.LoadEnemy(type);
             var pool = new Pool(data.Prefab.GetComponent<IPoolObject>());
-            _pool.Add(type, pool);
+            _poolSet.Add(type, pool);
             _models.Add(type, new EnemyModel(data.Type, data.MaxHealth, data.Damage, data.Speed));
-            return this;
         }
 
-        public IPoolSet<EnemyType> GetViewsPool() => _pool;
-        public IEnemyModelSet GetModels() => _models;
+        public override IPoolSet<EnemyType> GetView() => _poolSet;
+        public override IEnemyModelSet GetModel() => _models;
     }
 }

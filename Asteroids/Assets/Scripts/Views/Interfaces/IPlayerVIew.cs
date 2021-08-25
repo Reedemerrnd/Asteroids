@@ -1,7 +1,7 @@
 
 namespace Asteroids.Views
 {
-    public interface IPlayerView : IFullMove, IShoot, ITakeDamage
+    public interface IPlayerView : IFullMove, IShoot, ITakeEnemyDamage
     {
 
     }

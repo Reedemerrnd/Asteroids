@@ -8,6 +8,6 @@ namespace Asteroids.Views
 {
     public interface IDoDamage
     {
-        public int Damage { get; set; }
+        public void SetDamage(int damage);
     }
 }

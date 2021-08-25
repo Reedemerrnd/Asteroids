@@ -4,7 +4,7 @@ using Asteroids.Data;
 
 namespace Asteroids.Views
 {
-    public class AsteroidView : InteractiveObject, ITakeDamage, IEnemy
+    internal class AsteroidView : PoolObject, ITakeDamage, IEnemy
     {
         [SerializeField] private EnemyType _type;
         private int _health;
@@ -17,7 +17,7 @@ namespace Asteroids.Views
             {
                 if (value <= 0)
                 {
-                    Destroy();
+                    Deactivate();
                 }
                 else
                 {
@@ -25,17 +25,10 @@ namespace Asteroids.Views
                 }
             }
         }
-        public event Action<GameObject, int> OnDamageTaken;
-        protected override void Interaction(Collider2D other)
+ 
+        public void TakeDamage(int damage)
         {
-            if (TryGetComponent<IPlayerProjectile>(out var projectile))
-            {
-                TakeDamage(projectile.Damage);
-            }
-        }
-        private void TakeDamage(int damage)
-        {
-            OnDamageTaken?.Invoke(gameObject, damage);
+            Health -= damage;
         }
 
     }

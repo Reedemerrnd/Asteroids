@@ -8,11 +8,13 @@ using UnityEngine;
 
 namespace Asteroids.Views
 {
-    public abstract class BaseAmunition : InteractiveObject
+    internal abstract class BaseAmunition : PoolObject
     {
-        protected override void Interaction(Collider2D other)
+        protected abstract void Interaction(Collider2D other);
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            Destroy();
+            Interaction(collision);
         }
     }
 }
