@@ -31,11 +31,12 @@ namespace Controller
             _enemyPool.TryGetItem(type, out var enemy);
             var position = _spawnModel.GetSpawnPoint();
 
-            var enemyHealth = enemy.GetComponent<IEnemy>();
-            enemyHealth.Health = _enemyModels[enemyHealth.Type].Health;
+            var enemyView = enemy.GetComponent<IEnemy>();
+            enemyView.Health = _enemyModels[enemyView.Type].Health;
+            enemyView.SetDamage(_enemyModels[type].Damage);
 
             enemy.transform.position = position;
-            enemy.GetComponent<IMove>().Move(AxisManager.POSITIVE, _enemyModels[type].Speed);
+            enemy.GetComponent<IMove>().Move(AxisManager.NEGATIVE, _enemyModels[type].Speed);
         }
 
         private void SpawnEnemy()
@@ -53,6 +54,7 @@ namespace Controller
             var delay = Randomize(_spawnModel.MinDelay, _spawnModel.MaxDelay);
             if(_time+delay <= Time.time)
             {
+                SpawnEnemy();
                 SpawnEnemy();
                 SpawnEnemy();
                 _time = Time.time;

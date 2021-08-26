@@ -24,7 +24,7 @@ namespace Asteroids.Data
         {
             if (_set.ContainsKey(type))
             {
-                item = _set[type].GetItem().Self;
+                item = _set[type].GetItem().GameObj;
                 return true;
             }
             item = null;

@@ -16,8 +16,8 @@ namespace Asteroids.Views
 
         public virtual void Move(float axis, float speed)
         {
-            var forward2d = new Vector2(transform.right.x, transform.right.y);
-            _rigidbody.AddForce(forward2d * axis * speed);
+            var forward2d = new Vector2(transform.up.x, transform.up.y);
+            _rigidbody.AddForce(transform.up * axis * speed);
         }
 
     }

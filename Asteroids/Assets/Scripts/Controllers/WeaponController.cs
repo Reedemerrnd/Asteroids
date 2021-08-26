@@ -30,10 +30,9 @@ namespace Controller
         {
             foreach (var muzzle in _view.MuzzlesTransform)
             {
-                var bullet = _ammoPool.GetItem().Self;
-                bullet.transform.position = muzzle.transform.position;
-                bullet.transform.rotation = muzzle.rotation;
+                var bullet = _ammoPool.GetItemAt(muzzle.transform.position, muzzle.rotation).GameObj;
                 bullet.GetComponent<Bullet>().Move(1f, _weapon.FirePower);
+                bullet.GetComponent<Bullet>().SetDamage(_weapon.Damage);
             }
         }
 

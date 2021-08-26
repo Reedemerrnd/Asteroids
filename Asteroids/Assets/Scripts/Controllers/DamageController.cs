@@ -23,7 +23,8 @@ namespace Controller
 
         private void ProcessPlayerDamage(int damage)
         {
-            _playerModel.Health -= damage;
+            _playerModel.TakeDamage(damage);
+            Debug.Log(_playerModel.Health);
         }
  
         public void Init()

@@ -12,29 +12,29 @@ namespace Asteroids.Data
     {
         IPoolObject _poolObject;
 
-        private Stack<IPoolObject> _poolStack;
+        private Stack<GameObject> _poolStack;
         public Pool(IPoolObject poolObject)
         {
             _poolObject = poolObject;
-            _poolStack = new Stack<IPoolObject>();
+            _poolStack = new Stack<GameObject>();
         }
         public IPoolObject GetItem()
         {
-            IPoolObject result;
-            if (_poolStack.Count == 0)
-            {
-                var obj = GameObject.Instantiate(_poolObject.Self);
-                result = obj.GetComponent<IPoolObject>();
-            }
-            else
-            {
-                result = _poolStack.Pop();
-            }
-            result.Activate().Pool = this;
+            return GetItemAt(Vector3.zero, Quaternion.identity);
+        }
+        public IPoolObject GetItemAt(Vector3 position, Quaternion rotation)
+        {
+            var obj = _poolStack.Count == 0 ? GameObject.Instantiate(_poolObject.GameObj) : _poolStack.Pop();
+            obj.transform.position = position;
+            obj.transform.rotation = rotation;
+            var result = obj.GetComponent<IPoolObject>().Activate();
+            result.Pool = this;
             return result;
         }
 
-        public void ReturnToPoll(IPoolObject item) => _poolStack.Push(item);
+        private GameObject GetObject() => _poolStack.Count == 0 ? GameObject.Instantiate(_poolObject.GameObj) : _poolStack.Pop();
+
+        public void ReturnToPool(IPoolObject item) => _poolStack.Push(item.GameObj);
 
     }
 }

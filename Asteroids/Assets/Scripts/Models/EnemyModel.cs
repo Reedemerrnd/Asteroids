@@ -16,22 +16,8 @@ namespace Asteroids.Models
         private float _speed;
 
         public event Action OnDeath;
-        public int Health
-        {
-            get => _health;
-            set
-            {
-                _health += value;
-                if (_health <= 0)
-                {
-                    OnDeath?.Invoke();
-                }
-                else if (_health > _maxHealth)
-                {
-                    _health = _maxHealth;
-                }
-            }
-        }
+        public int Health => _health;
+
         public float Speed => _speed; 
         public int Damage => _damage;
         public EnemyType enemyType => _enemyType;

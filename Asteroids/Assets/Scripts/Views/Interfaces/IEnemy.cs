@@ -7,7 +7,7 @@ using Asteroids.Data;
 
 namespace Asteroids.Views
 {
-    public interface IEnemy : IEnemyHealth
+    public interface IEnemy : IEnemyHealth, ITakeDamage, IDoDamage
     {
         public EnemyType Type { get;}
     }

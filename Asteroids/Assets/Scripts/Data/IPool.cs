@@ -10,7 +10,8 @@ namespace Asteroids.Data
 {
     public interface IPool
     {
+        public IPoolObject GetItemAt(Vector3 position, Quaternion rotation);
         public IPoolObject GetItem();
-        public void ReturnToPoll(IPoolObject item);
+        public void ReturnToPool(IPoolObject item);
     }
 }
