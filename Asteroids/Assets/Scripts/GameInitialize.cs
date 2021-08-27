@@ -27,9 +27,10 @@ namespace Asteroids
 
             var enemyspawnModel = new EnemySpawnModel();
 
-            var weaponData = dataLoader.LoadWeapon(WeaponType.Base);
-            var mainWeaponAmmoPool = new Pool(weaponData.AmmoPrefab.GetComponent<IPoolObject>());
-            var weaponModel = new PrimaryWeapon(weaponData);
+            var weaponFactory = new WeaponFactory(dataLoader);
+            weaponFactory.SetWeapon(WeaponType.Base);
+            var mainWeaponAmmoPool = weaponFactory.GetView();
+            var weaponModel = weaponFactory.GetModel();
 
             var playerView = shipFactory.GetView();
             var playerModel = shipFactory.GetModel();

@@ -25,12 +25,19 @@ namespace Asteroids.Data
             return obj;
         }
 
-        public static GameObject SetCollider<T>(this GameObject obj, bool isTrigger) where T : Collider
+        public static GameObject SetCollider<T>(this GameObject obj, bool isTrigger) where T : Collider2D
         {
             obj.GetOrAddComponent<T>().isTrigger = isTrigger;
             return obj;
         }
 
+        public static GameObject AddRigidBody2D(this GameObject obj, float mass, float gravityScale)
+        {
+            var rigidbody = obj.GetOrAddComponent<Rigidbody2D>();
+            rigidbody.mass = mass;
+            rigidbody.gravityScale = gravityScale;
+            return obj;
+        }
         public static GameObject AddRigidBody2D(this GameObject obj,float mass)
         {
             obj.GetOrAddComponent<Rigidbody2D>().mass = mass;
@@ -43,16 +50,24 @@ namespace Asteroids.Data
             return obj;
         }
 
+        public static GameObject SetScale(this GameObject obj,Vector3 scale)
+        {
+            obj.transform.localScale = scale;
+            return obj;
+        }
+
         public static GameObject ModScale(this GameObject obj, float mod)
         {
             obj.transform.localScale = obj.transform.localScale * mod;
             return obj;
         }
+
         public static GameObject SetColor(this GameObject obj, Color color)
         {
             obj.GetOrAddComponent<SpriteRenderer>().material.color = color;
             return obj;
         }
+
         public static GameObject SetSprite(this GameObject obj, Sprite sprite)
         {
             obj.GetOrAddComponent<SpriteRenderer>().sprite = sprite;
