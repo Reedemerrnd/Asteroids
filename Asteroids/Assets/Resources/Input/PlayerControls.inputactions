@@ -15,7 +15,7 @@
                 },
                 {
                     "name": "FIre",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "b32a6619-8e23-4f60-abf0-1dd6b6062e58",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -46,6 +46,17 @@
                     "name": "",
                     "id": "00d9ce87-0fcf-4821-b572-322a3216daeb",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FIre",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6fd64ea1-25c7-4bc9-bf7a-ef07794f4b99",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -118,6 +129,17 @@
                     "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "682b6ea0-7f30-4afd-88a5-15673b897fd7",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "Invert,Normalize(min=-1,max=1)",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "2D Vector",
