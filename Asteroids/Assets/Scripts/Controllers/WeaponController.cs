@@ -32,7 +32,7 @@ namespace Controller
             {
                 var bulletPrefab = _ammoPool.GetItemAt(muzzle.transform.position, muzzle.rotation).GameObj;
                 var bullet = bulletPrefab.GetComponent<Bullet>();
-                bullet.Move(AxisManager.POSITIVE, _weapon.FirePower);
+                bullet.Move(Vector2.up, _weapon.FirePower);
                 bullet.SetDamage(_weapon.Damage);
             }
         }

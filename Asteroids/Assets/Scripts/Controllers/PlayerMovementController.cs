@@ -13,11 +13,11 @@ namespace Controller
 {
     class PlayerMovementController : IController, IFixedExecute, IExecute
     {
-        private readonly IFullMove _playerView;
+        private readonly IMoveAndRotate _playerView;
         private readonly IInput _input;
         private readonly IFullMoveModel _playerModel;
 
-        public PlayerMovementController(IFullMove playerView, IInput input, IFullMoveModel playerModel)
+        public PlayerMovementController(IMoveAndRotate playerView, IInput input, IFullMoveModel playerModel)
         {
             _playerView = playerView;
             _input = input;
@@ -27,11 +27,12 @@ namespace Controller
         public void FixedExecute()
         {
             _playerView.Move(_input.Thrust, _playerModel.Speed);
+            Debug.Log(_input.Thrust);
         }
 
         public void Execute()
         {
-            _playerView.SetRotation(_input.Rotation, _playerModel.RotationSpeed);
+            _playerView.Rotate(_input.Rotation, _playerModel.RotationSpeed);
         }
     }
 }

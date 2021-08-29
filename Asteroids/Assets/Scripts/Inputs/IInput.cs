@@ -11,6 +11,6 @@ namespace Inputs
     {
         public event Action OnFire;
         public float Rotation { get; }
-        public float Thrust { get; }
+        public Vector2 Thrust { get; }
     }
 }

@@ -8,13 +8,39 @@ using UnityEngine;
 
 namespace Asteroids.Views
 {
-    internal abstract class BaseAmunition : PoolObject
+    internal abstract class BaseAmunition : PoolObject, IMove, IInjectable<IMoveVariant>
     {
-        protected abstract void Interaction(Collider2D other);
+        private IMoveVariant _move;
+        private Rigidbody2D _rigidbody;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             Interaction(collision);
+        }
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody2D>();
+        }
+
+        protected abstract void Interaction(Collider2D other);
+
+
+        public void Move(Vector2 direction, float speed) => _move?.Move(_rigidbody, direction, speed);
+        public void Inject(IMoveVariant dependency)
+        {
+            _move = dependency;
+        }
+
+        protected override void Deactivate()
+        {
+            _move.Stop(_rigidbody);
+            base.Deactivate();
+        }
+        public override GameObject Clone()
+        {
+            var obj = Instantiate(gameObject);
+            obj.GetComponent<BaseAmunition>()._move = _move;
+            return obj;
         }
     }
 }

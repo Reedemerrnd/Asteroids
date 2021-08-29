@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Asteroids.Data
 {
@@ -14,7 +12,7 @@ namespace Asteroids.Data
         [SerializeField] private float _fireRate;
         [SerializeField] private int _damage;
 
-        public BulletData Bullet => bullet; 
+        public BulletData Bullet => bullet;
         public WeaponType Type => _type;
         public GameObject AmmoPrefab => _ammoPrefab;
         public float FireRate => _fireRate;

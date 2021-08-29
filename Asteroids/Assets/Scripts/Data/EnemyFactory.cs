@@ -22,7 +22,8 @@ namespace Asteroids.Data
         public  void Init(EnemyType type)
         {
             var data = _dataLoader.LoadEnemy(type);
-            var pool = new Pool(data.Prefab.GetComponent<IPoolObject>());
+            data.Prefab.GetComponent<IInjectable<IMoveVariant>>().Inject(new OneAxisMove());
+            var pool = new Pool(data.Prefab.GetComponent<IPoolObjectPrototype>());
             _poolSet.Add(type, pool);
             _models.Add(type, new EnemyModel(data.Type, data.MaxHealth, data.Damage, data.Speed));
         }

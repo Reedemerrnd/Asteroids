@@ -8,17 +8,17 @@ using UnityEngine;
 
 namespace Asteroids.Views
 {
-    internal abstract class PoolObject : BaseRigidbodyMovingObject, IPoolObject
+    internal abstract class PoolObject : MonoBehaviour, IPoolObjectPrototype
     {
         private float _lifeTime;
-        private IPoolObject _poolObject;
+        private IPoolObjectPrototype _poolObject;
         private IPool _pool;
 
         public IPool Pool { set => _pool = value; }
         public GameObject GameObj => gameObject;
 
 
-        public virtual IPoolObject Activate(float lifeTime)
+        public virtual IPoolObjectPrototype Activate(float lifeTime)
         {
             gameObject.SetActive(true);
             _lifeTime = lifeTime;
@@ -32,6 +32,6 @@ namespace Asteroids.Views
             _pool?.ReturnToPool(this);
             CancelInvoke(nameof(Deactivate));
         }
-
+        public abstract GameObject Clone();
     }
 }

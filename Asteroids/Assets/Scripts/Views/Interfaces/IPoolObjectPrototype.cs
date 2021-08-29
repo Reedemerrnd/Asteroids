@@ -4,10 +4,11 @@ using Asteroids.Data;
 
 namespace Asteroids.Views
 {
-    public interface IPoolObject
+    public interface IPoolObjectPrototype
     {
+        public GameObject Clone();
         public GameObject GameObj { get; }
-        public IPoolObject Activate(float lifeTime);
+        public IPoolObjectPrototype Activate(float lifeTime);
         public IPool Pool { set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +22,14 @@ namespace Asteroids.Data
         }
 
         public override IPlayerModel GetModel() => new ShipModel(_data.MaxHealth,_data.Speed,_data.RotationSpeed);
-        public override IPlayerView GetView() => GameObject.Instantiate(_data.Prefab, Vector3.zero, Quaternion.identity).GetComponent<IPlayerView>();
+        public override IPlayerView GetView()
+        {
+            var view = Object.Instantiate(_data.Prefab, Vector3.zero, Quaternion.identity);
+            view.GetComponent<IInjectable<IMoveAndRotateVariant>>()
+                //.Inject(new OneAxisMoveAndRotate())
+                .Inject(new TwoAxisMoveAndRotate())
+                ;
+            return view.GetComponent<IPlayerView>();
+        }
     }
 }

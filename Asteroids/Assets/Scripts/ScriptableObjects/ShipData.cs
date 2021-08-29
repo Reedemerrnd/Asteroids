@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Asteroids.Data;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Asteroids.Data
 {

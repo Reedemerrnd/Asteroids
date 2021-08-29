@@ -5,11 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Asteroids
+namespace Asteroids.Views
 {
-    public static class AxisManager
+    public interface IMoveAndRotate : IMove, IRotate
     {
-        public const float POSITIVE = 1f;
-        public const float NEGATIVE = -1f;
     }
 }

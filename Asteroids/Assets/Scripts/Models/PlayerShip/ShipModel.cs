@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Asteroids.Models
 {
@@ -18,8 +14,8 @@ namespace Asteroids.Models
         public int Health => _health;
         public float Speed { get; }
         public float RotationSpeed { get; }
-       
-        
+
+
         public ShipModel(int maxHealth, float speed, float rotationSpeed)
         {
             _maxHealth = maxHealth;
@@ -31,7 +27,7 @@ namespace Asteroids.Models
         public void TakeDamage(int damage)
         {
             _health -= damage;
-            if(_health <= 0)
+            if (_health <= 0)
             {
                 OnDeath?.Invoke();
             }

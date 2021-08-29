@@ -25,7 +25,7 @@
                     "name": "Thrust",
                     "type": "Value",
                     "id": "7f734018-69a6-418b-b1ba-e0ccb9fb9860",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 }
@@ -120,9 +120,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
+                    "name": "2D Vector",
                     "id": "c5f5d30c-e8aa-47db-8ec0-0d5df081c07f",
-                    "path": "1DAxis",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -131,19 +131,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
+                    "name": "Up",
                     "id": "57ba25a9-04a3-4c42-a6ce-be37dc445c89",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Thrust",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "b0eb7584-5d8a-40dd-a6d8-a1f3ee551882",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -153,20 +142,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "291ea9ce-1ed5-41ef-af10-e2651634491b",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Thrust",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "a827dc2b-7963-4141-8a27-a2304d45729a",
-                    "path": "<Gamepad>/leftStick/down",
+                    "name": "Down",
+                    "id": "b0eb7584-5d8a-40dd-a6d8-a1f3ee551882",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -175,9 +153,75 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "bd0a0812-6aa2-4f4f-b151-539b6f45c317",
+                    "name": "Left",
+                    "id": "bf61684a-9afa-4b7d-9443-264a8a536c5a",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "fe95c4d2-dff6-4198-a4f9-b5514a900ba9",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "291ea9ce-1ed5-41ef-af10-e2651634491b",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Up",
+                    "id": "a827dc2b-7963-4141-8a27-a2304d45729a",
                     "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Down",
+                    "id": "bd0a0812-6aa2-4f4f-b151-539b6f45c317",
+                    "path": "<XInputController>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "51b16e18-c65b-4d2c-a516-5568ed67e3dd",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "df8fa7e0-8f34-46ce-af5c-7f39eb86165b",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

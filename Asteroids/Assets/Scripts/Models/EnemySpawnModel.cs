@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
 namespace Asteroids.Models
 {
@@ -38,7 +33,7 @@ namespace Asteroids.Models
 
         private Vector3 RandomRightPoint() => new Vector3(_maxX + _offset, Randomize(_minY, _maxY), 0);
         private Vector3 RandomLeftPoint() => new Vector3(_minX - _offset, Randomize(_minY, _maxY), 0);
-        private Vector3 RandomTopPoint() => new Vector3(Randomize(_minX, _maxX),_maxX + _offset, 0);
+        private Vector3 RandomTopPoint() => new Vector3(Randomize(_minX, _maxX), _maxX + _offset, 0);
         private Vector3 RandomleftPoint() => new Vector3(Randomize(_minX, _maxX), _minX - _offset, 0);
         private float Randomize(float min, float max) => UnityEngine.Random.Range(min, max);
     }

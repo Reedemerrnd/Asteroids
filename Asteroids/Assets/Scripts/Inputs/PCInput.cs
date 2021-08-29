@@ -15,7 +15,7 @@ namespace Inputs
         private InputAction _fire;
 
         public float Rotation => _rotation.ReadValue<float>();
-        public float Thrust => _thrust.ReadValue<float>();
+        public Vector2 Thrust => _thrust.ReadValue<Vector2>();
         
 
         public PCInput()

@@ -37,6 +37,7 @@ namespace Asteroids.Data
                                                                   .GetOrAddComponent<Bullet>()
                                                                   ;
             bulletprefab.gameObject.SetActive(false);
+            bulletprefab.Inject(new OneAxisMove());
             return new Pool(bulletprefab);
         }
     }
