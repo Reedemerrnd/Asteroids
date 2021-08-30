@@ -1,8 +1,8 @@
 ﻿namespace Asteroids.Models
 {
-    internal interface IShootProjectiles
+    public interface IShootProjectiles
     {
-        public float FireRate { get; }
+        public bool CanShoot();
         public float FirePower { get; }
     }
 }

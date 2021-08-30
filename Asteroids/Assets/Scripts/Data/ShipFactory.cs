@@ -26,9 +26,9 @@ namespace Asteroids.Data
         {
             var view = Object.Instantiate(_data.Prefab, Vector3.zero, Quaternion.identity);
             view.GetComponent<IInjectable<IMoveAndRotateVariant>>()
-                //.Inject(new OneAxisMoveAndRotate())
-                .Inject(new TwoAxisMoveAndRotate())
-                ;
+                //.Inject(new OneAxisMoveAndRotate());
+                .Inject(new TwoAxisMoveAndRotate());
+            view.GetComponent<IInjectable<IShootVariant>>().Inject(new BaseShootVariant());
             return view.GetComponent<IPlayerView>();
         }
     }

@@ -1,9 +1,11 @@
+using Asteroids.Data;
 using UnityEngine;
 
 namespace Asteroids.Views
 {
     public interface IShoot
     {
-        public Transform[] MuzzlesTransform { get; }
+        public void Shoot(float firePower);
+        public void SetAmmo(IPool ammoPool);
     }
 }

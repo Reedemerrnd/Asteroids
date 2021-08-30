@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-    class WeaponController : IController, IInitialize, IDisable
+    class WeaponController : IController, IInitialize, IExecute
     {
         private IShoot _view;
         private IWeaponModel _weapon;
@@ -25,26 +25,18 @@ namespace Controller
             _ammoPool = ammoPool;
         }
 
-        // Inplement firerate
-        private void Shoot()
-        {
-            foreach (var muzzle in _view.MuzzlesTransform)
-            {
-                var bulletPrefab = _ammoPool.GetItemAt(muzzle.transform.position, muzzle.rotation).GameObj;
-                var bullet = bulletPrefab.GetComponent<Bullet>();
-                bullet.Move(Vector2.up, _weapon.FirePower);
-                bullet.SetDamage(_weapon.Damage);
-            }
-        }
-
-        public void Disable()
-        {
-            _input.OnFire -= Shoot;
-        }
 
         public void Init()
         {
-            _input.OnFire += Shoot;
+            _view.SetAmmo(_ammoPool);
+        }
+
+        public void Execute()
+        {
+            if (_input.Fire && _weapon.CanShoot())
+            {
+                _view.Shoot(_weapon.FirePower);
+            }
         }
     }
 }

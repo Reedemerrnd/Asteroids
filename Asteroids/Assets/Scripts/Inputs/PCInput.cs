@@ -16,6 +16,7 @@ namespace Inputs
 
         public float Rotation => _rotation.ReadValue<float>();
         public Vector2 Thrust => _thrust.ReadValue<Vector2>();
+        public bool Fire => _fire.ReadValue<float>() > 0;
         
 
         public PCInput()
@@ -26,13 +27,8 @@ namespace Inputs
             _fire = _actions.FindAction("Fire");
             _thrust = _actions.FindAction("Thrust");
             _rotation = _actions.FindAction("Rotation");
-            _fire.started += Fire;
         }
 
-        private void Fire(InputAction.CallbackContext context)
-        {
-            OnFire?.Invoke();
-        }
         
     }
 }

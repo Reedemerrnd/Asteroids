@@ -9,7 +9,7 @@ namespace Inputs
 {
     interface IInput
     {
-        public event Action OnFire;
+        public bool Fire { get; }
         public float Rotation { get; }
         public Vector2 Thrust { get; }
     }

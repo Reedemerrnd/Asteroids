@@ -30,15 +30,23 @@ namespace Asteroids.Data
 
         public override IPool GetView()
         {
-            var bulletprefab = new GameObject(_weapon.Bullet.Name).SetSprite(_weapon.Bullet.Image)
-                                                                  .AddRigidBody2D(1f,0f)
-                                                                  .SetCollider<CircleCollider2D>(true)
-                                                                  .SetScale(_weapon.Bullet.Scale)
-                                                                  .GetOrAddComponent<Bullet>()
-                                                                  ;
-            bulletprefab.gameObject.SetActive(false);
-            bulletprefab.Inject(new OneAxisMove());
+            Bullet bulletprefab = BuildBullet();
             return new Pool(bulletprefab);
+        }
+
+        private Bullet BuildBullet()
+        {
+            var bulletprefab = new GameObject(_weapon.Bullet.Name)
+                .SetSprite(_weapon.Bullet.Image)
+                .AddRigidBody2D(1f, 0f)
+                .SetCollider<CircleCollider2D>(true)
+                .SetScale(_weapon.Bullet.Scale)
+                .GetOrAddComponent<Bullet>()
+                ;
+            bulletprefab.gameObject.SetActive(false);
+            bulletprefab.SetDamage(_weapon.Damage);
+            bulletprefab.Inject(new OneAxisMove());
+            return bulletprefab;
         }
     }
 }
