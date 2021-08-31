@@ -9,9 +9,9 @@ namespace Inputs
 {
     interface IInput
     {
-        public bool Fire { get; }
+        public bool FireHold { get; }
         public float Rotation { get; }
         public Vector2 Thrust { get; }
-        public bool Lock { get; }
+        public event Action OnLockPressed;
     }
 }

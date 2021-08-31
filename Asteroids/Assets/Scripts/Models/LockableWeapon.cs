@@ -1,4 +1,6 @@
-﻿namespace Asteroids.Models
+﻿using UnityEngine;
+
+namespace Asteroids.Models
 {
     public class LockableWeapon : IWeaponModel, ILockable
     {
@@ -10,19 +12,12 @@
             _weaponModel = weaponModel;
         }
 
-
-
-        public float FirePower => _weaponModel.FirePower;
-
-        public int Damage => _weaponModel.Damage;
-
-        public bool CanShoot()
+        public void Shoot(Transform[] muzzles)
         {
             if (!_locked)
             {
-                return _weaponModel.CanShoot();
+                _weaponModel.Shoot(muzzles);
             }
-            return false;
         }
 
         public void SwitchLock()

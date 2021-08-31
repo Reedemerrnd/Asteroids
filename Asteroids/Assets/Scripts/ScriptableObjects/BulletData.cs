@@ -8,5 +8,6 @@ namespace Asteroids.Data
         public string Name;
         public Vector3 Scale;
         public Sprite Image;
+        public int Damage;
     }
 }

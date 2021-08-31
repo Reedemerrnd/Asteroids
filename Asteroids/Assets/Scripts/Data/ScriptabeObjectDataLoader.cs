@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Asteroids.Data
@@ -6,8 +5,8 @@ namespace Asteroids.Data
     public class ScriptabeObjectDataLoader : IDataLoader
     {
 
-        public IEnemyData LoadEnemy(EnemyType enemyType) => Resources.Load<EnemyData>(ResourcesPath.Enemies[enemyType]);
-        public IShipData LoadShip(PlayerShip shipType) => Resources.Load<ShipData>(ResourcesPath.PlayerShips[shipType]);
-        public IWeaponData LoadWeapon(WeaponType weaponType) => Resources.Load<WeaponData>(ResourcesPath.Weapons[weaponType]);
+        public EnemyData LoadEnemy(EnemyType enemyType) => Resources.Load<EnemyData>(ResourcesPath.Enemies[enemyType]);
+        public ShipData LoadShip(PlayerShip shipType) => Resources.Load<ShipData>(ResourcesPath.PlayerShips[shipType]);
+        public WeaponData LoadWeapon(WeaponType weaponType) => Resources.Load<WeaponData>(ResourcesPath.Weapons[weaponType]);
     }
 }

@@ -36,7 +36,7 @@ namespace Controller
             enemyView.SetDamage(_enemyModels[type].Damage);
 
             enemy.transform.position = position;
-            enemyView.Move(Vector2.down, _enemyModels[type].Speed);
+            enemyView.Launch(Vector2.down, _enemyModels[type].Speed);
         }
 
         private void SpawnEnemy()

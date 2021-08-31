@@ -8,30 +8,28 @@ using Asteroids.Views;
 
 namespace Asteroids.Data
 {
-    internal class WeaponFactory : AbstractFactory<IWeaponModel, IPool>
+    internal class WeaponFactory
     {
 
-        private IWeaponData _weapon;
+        private WeaponData _weapon;
+        private readonly IDataLoader _dataLoader;
 
-        public WeaponFactory(IDataLoader dataLoader) : base(dataLoader)
+        public WeaponFactory(IDataLoader dataLoader)
         {
-
+            _dataLoader = dataLoader;
         }
+
         public void SetWeapon(WeaponType weaponType)
         {
             _weapon = _dataLoader.LoadWeapon(weaponType);
         }
 
 
-        public override IWeaponModel GetModel()
-        {
-            return new PrimaryWeapon(_weapon.FireRate, _weapon.FirePower, _weapon.Damage);
-        }
-
-        public override IPool GetView()
+        public IWeaponModel GetModel()
         {
             Bullet bulletprefab = BuildBullet();
-            return new Pool(bulletprefab);
+            var ammoPool = new Pool(bulletprefab);
+            return new PrimaryWeapon(_weapon.FireRate, _weapon.FirePower, ammoPool);
         }
 
         private Bullet BuildBullet()
@@ -44,7 +42,7 @@ namespace Asteroids.Data
                 .GetOrAddComponent<Bullet>()
                 ;
             bulletprefab.gameObject.SetActive(false);
-            bulletprefab.SetDamage(_weapon.Damage);
+            bulletprefab.SetDamage(_weapon.Bullet.Damage);
             bulletprefab.Inject(new OneAxisMove());
             return bulletprefab;
         }

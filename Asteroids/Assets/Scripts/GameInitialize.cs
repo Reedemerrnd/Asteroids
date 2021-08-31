@@ -1,10 +1,7 @@
+using Asteroids.Data;
+using Asteroids.Models;
 using Controller;
 using Inputs;
-using System.Linq;
-using Asteroids.Models;
-using Asteroids.Data;
-using Asteroids.Views;
-using UnityEngine;
 
 namespace Asteroids
 {
@@ -15,8 +12,13 @@ namespace Asteroids
             var input = new PCInput();
             var dataLoader = new ScriptabeObjectDataLoader();
 
+            var weaponFactory = new WeaponFactory(dataLoader);
+            weaponFactory.SetWeapon(WeaponType.Base);
+            var weaponModel = weaponFactory.GetModel();
+            var lockableWeapon = new LockableWeapon(weaponModel);
+
             var shipFactory = new ShipFactory(dataLoader);
-            shipFactory.SetShip(PlayerShip.Base);
+            shipFactory.SetShip(PlayerShip.Base, lockableWeapon);
 
             var enemyFactory = new EnemyFactory(dataLoader);
             enemyFactory.Init(EnemyType.Asteroid);
@@ -27,20 +29,15 @@ namespace Asteroids
 
             var enemyspawnModel = new EnemySpawnModel();
 
-            var weaponFactory = new WeaponFactory(dataLoader);
-            weaponFactory.SetWeapon(WeaponType.Base);
-            var mainWeaponAmmoPool = weaponFactory.GetView();
-            var weaponModel = weaponFactory.GetModel();
-            var lockableWeapon = new LockableWeapon(weaponModel);
 
             var playerView = shipFactory.GetView();
             var playerModel = shipFactory.GetModel();
 
             controllers
                 .Add(new PlayerMovementController(playerView, input, playerModel))
-                .Add(new WeaponController(playerView, lockableWeapon, input, mainWeaponAmmoPool))
+                .Add(new WeaponController(playerView, lockableWeapon, input))
                 .Add(new EnemySpawnController(enemyPoolSet,enemyModels, enemyspawnModel))
-                .Add(new DamageController(playerView, playerModel))
+                .Add(new DamageController(playerView, playerModel.Health))
                 ;
 
         }

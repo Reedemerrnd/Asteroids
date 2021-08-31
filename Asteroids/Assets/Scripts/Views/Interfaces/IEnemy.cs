@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroids.Data;
+﻿using Asteroids.Data;
+using Asteroids.Models;
 
 namespace Asteroids.Views
 {
-    public interface IEnemy : IEnemyHealth, ITakeDamage, IDoDamage, IMove
+    internal interface IEnemy : IEnemyHealth, ITakeDamage, IProjectile, IInjectable<IMoveVariant>
     {
-        public EnemyType Type { get;}
+        public EnemyType Type { get; }
     }
 }

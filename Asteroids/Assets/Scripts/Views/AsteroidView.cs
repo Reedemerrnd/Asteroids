@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 using Asteroids.Data;
+using Asteroids.Models;
 
 namespace Asteroids.Views
 {
-    internal class AsteroidView : PoolObject, IEnemy, IInjectable<IMoveVariant>
+    internal class AsteroidView : PoolObject, IEnemy
     {
         [SerializeField] private EnemyType _type;
         private int _health;
@@ -29,36 +30,25 @@ namespace Asteroids.Views
             }
         }
 
-        private void Awake()
-        {
-            _rigidbody = GetComponent<Rigidbody2D>();
-        }
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            Interaction(collision);
-        }
+        private void Awake() => _rigidbody = GetComponent<Rigidbody2D>();
+        private void OnTriggerEnter2D(Collider2D collision) => Interaction(collision);
 
 
         public void SetDamage(int damage) => _damage = damage;
 
         private void Interaction(Collider2D other)
         {
-            if (other.gameObject.TryGetComponent<IPlayerView>(out var player))
+            if (other.gameObject.TryGetComponent<ITakeEnemyDamage>(out var player))
             {
                 player.TakeDamage(_damage);
                 Deactivate();
             }
         }
-        public void TakeDamage(int damage)
-        {
-            Health -= damage;
-        }
+        public void TakeDamage(int damage) => Health -= damage;
 
-        public void Move(Vector2 direction, float speed) => _move.Move(_rigidbody, direction,speed);
-        public void Inject(IMoveVariant dependency)
-        {
-            _move = dependency;
-        }
+        public void Launch(Vector2 direction, float speed) => _move.Move(_rigidbody, direction, speed);
+
+        public void Inject(IMoveVariant dependency) => _move = dependency;
 
 
         protected override void Deactivate()
@@ -72,6 +62,8 @@ namespace Asteroids.Views
             obj.GetComponent<AsteroidView>()._move = _move;
             return obj;
         }
+
+
     }
 }
 

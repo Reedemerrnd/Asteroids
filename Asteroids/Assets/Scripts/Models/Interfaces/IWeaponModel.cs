@@ -1,6 +1,6 @@
 namespace Asteroids.Models
 {
-    public interface IWeaponModel : IShootProjectiles, IDoDamage
+    public interface IWeaponModel : IShoot
     {
     }
 }

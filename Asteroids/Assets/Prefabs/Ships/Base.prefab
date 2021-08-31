@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4324294861409646799}
   - component: {fileID: 4324294861409646795}
   - component: {fileID: 4324294861409646794}
-  - component: {fileID: 4324294861409646797}
+  - component: {fileID: 6737203454258960541}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -194,7 +194,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.33, y: 1.97}
   m_EdgeRadius: 0
---- !u!114 &4324294861409646797
+--- !u!114 &6737203454258960541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,9 +203,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4324294861409646798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7835273a63104ec43ab2932e7186b5e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 708cd4572717c6448854350ab2585d26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponMounts:
+  _barrels:
   - {fileID: 7840057231726396220}
   - {fileID: 6295751373113332947}

@@ -1,32 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Asteroids.Models;
 using Asteroids.Views;
-using Asteroids.Models;
-using Asteroids.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Controller
 {
     class DamageController : IController, IInitialize, IDisable
     {
-        private readonly IPlayerView _playerView;
-        private readonly IPlayerModel _playerModel;
+        private readonly IShip _playerView;
+        private readonly IHealthModel _playerHealthModel;
 
-        public DamageController(IPlayerView playerView, IPlayerModel playerModel)
+        public DamageController(IShip playerView, IHealthModel playerHealthModel)
         {
             _playerView = playerView;
-            _playerModel = playerModel;
+            _playerHealthModel = playerHealthModel;
         }
 
         private void ProcessPlayerDamage(int damage)
         {
-            _playerModel.TakeDamage(damage);
-            Debug.Log(_playerModel.Health);
+            _playerHealthModel.TakeDamage(damage);
+            Debug.Log(_playerHealthModel.Health);
         }
- 
+
         public void Init()
         {
             _playerView.OnDamageTaken += ProcessPlayerDamage;
@@ -34,7 +28,7 @@ namespace Controller
         public void Disable()
         {
             _playerView.OnDamageTaken -= ProcessPlayerDamage;
-            
+
         }
     }
 }

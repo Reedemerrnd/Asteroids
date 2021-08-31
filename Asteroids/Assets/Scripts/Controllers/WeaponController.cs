@@ -1,46 +1,49 @@
-﻿using System;
+﻿using Asteroids.Models;
 using Asteroids.Views;
-using Asteroids;
 using Inputs;
-using Asteroids.Models;
-using Asteroids.Data;
-using UnityEngine;
-using System.Collections.Generic;
 
 
 namespace Controller
 {
-    class WeaponController : IController, IInitialize, IExecute
+    class WeaponController : IController, IInitialize, IExecute, IDisable
     {
-        private IShoot _view;
+        private IShip _view;
         private IWeaponModel _weapon;
         private IInput _input;
-        private IPool _ammoPool;
 
-        public WeaponController(IShoot view, IWeaponModel weapon, IInput input, IPool ammoPool)
+        public WeaponController(IShip view, IWeaponModel weapon, IInput input)
         {
             _view = view;
             _weapon = weapon;
             _input = input;
-            _ammoPool = ammoPool;
         }
 
 
         public void Init()
         {
-            _view.SetAmmo(_ammoPool);
+            _input.OnLockPressed += LockWeapon;
         }
 
         public void Execute()
         {
-            if (_input.Fire && _weapon.CanShoot())
+            if (_input.FireHold)
             {
-                _view.Shoot(_weapon.FirePower);
+                _weapon.Shoot(_view.Barrels);
             }
-            if(_input.Lock && _weapon is ILockable lockable)
+        }
+
+        private void LockWeapon()
+        {
+            if (_weapon is ILockable lockable)
             {
                 lockable.SwitchLock();
             }
+
+        }
+
+        public void Disable()
+        {
+            _input.OnLockPressed -= LockWeapon;
         }
     }
 }

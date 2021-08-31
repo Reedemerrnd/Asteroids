@@ -3,16 +3,12 @@
 namespace Asteroids.Data
 {
     [CreateAssetMenu(menuName = "Game Resources/Ship")]
-    public sealed class ShipData : BaseFlyingObject, IShipData
+    public sealed class ShipData : ScriptableObject
     {
-        [SerializeField] private PlayerShip _type;
-        [SerializeField] private int _maxHealth;
-        [SerializeField] private float _rotationSpeed;
-
-        public PlayerShip Type => _type;
-        public GameObject Prefab => _prefab;
-        public float Speed => _speed;
-        public float RotationSpeed => _rotationSpeed;
-        public int MaxHealth => _maxHealth;
+        public PlayerShip Type;
+        public GameObject Prefab;
+        public float Speed;
+        public float RotationSpeed;
+        public int MaxHealth;
     }
 }
