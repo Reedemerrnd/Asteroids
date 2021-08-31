@@ -31,13 +31,14 @@ namespace Asteroids
             weaponFactory.SetWeapon(WeaponType.Base);
             var mainWeaponAmmoPool = weaponFactory.GetView();
             var weaponModel = weaponFactory.GetModel();
+            var lockableWeapon = new LockableWeapon(weaponModel);
 
             var playerView = shipFactory.GetView();
             var playerModel = shipFactory.GetModel();
 
             controllers
                 .Add(new PlayerMovementController(playerView, input, playerModel))
-                .Add(new WeaponController(playerView, weaponModel, input, mainWeaponAmmoPool))
+                .Add(new WeaponController(playerView, lockableWeapon, input, mainWeaponAmmoPool))
                 .Add(new EnemySpawnController(enemyPoolSet,enemyModels, enemyspawnModel))
                 .Add(new DamageController(playerView, playerModel))
                 ;

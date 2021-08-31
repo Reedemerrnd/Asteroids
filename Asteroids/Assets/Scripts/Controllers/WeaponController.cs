@@ -37,6 +37,10 @@ namespace Controller
             {
                 _view.Shoot(_weapon.FirePower);
             }
+            if(_input.Lock && _weapon is ILockable lockable)
+            {
+                lockable.SwitchLock();
+            }
         }
     }
 }

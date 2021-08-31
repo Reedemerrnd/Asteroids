@@ -58,8 +58,8 @@ namespace Asteroids.Views
         public void Inject(IMoveVariant dependency)
         {
             _move = dependency;
-            Debug.Log(_move);
         }
+
 
         protected override void Deactivate()
         {

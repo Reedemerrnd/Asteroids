@@ -27,7 +27,6 @@ namespace Controller
         public void FixedExecute()
         {
             _playerView.Move(_input.Thrust, _playerModel.Speed);
-            Debug.Log(_input.Thrust);
         }
 
         public void Execute()

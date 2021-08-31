@@ -12,5 +12,6 @@ namespace Inputs
         public bool Fire { get; }
         public float Rotation { get; }
         public Vector2 Thrust { get; }
+        public bool Lock { get; }
     }
 }

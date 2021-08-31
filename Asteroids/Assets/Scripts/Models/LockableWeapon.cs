@@ -1,8 +1,9 @@
 ﻿namespace Asteroids.Models
 {
-    public class LockableWeapon : IWeaponModel
+    public class LockableWeapon : IWeaponModel, ILockable
     {
         private readonly IWeaponModel _weaponModel;
+        private bool _locked = false;
 
         public LockableWeapon(IWeaponModel weaponModel)
         {
@@ -17,7 +18,16 @@
 
         public bool CanShoot()
         {
-            throw new System.NotImplementedException();
+            if (!_locked)
+            {
+                return _weaponModel.CanShoot();
+            }
+            return false;
+        }
+
+        public void SwitchLock()
+        {
+            _locked = !_locked;
         }
     }
 }
