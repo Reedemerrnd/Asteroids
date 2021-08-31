@@ -7,7 +7,7 @@ namespace Asteroids
 {
     public class GameInitialize
     {
-        public GameInitialize(Controllers controllers)
+        public GameInitialize(Controllers controllers, PlayerShip type)
         {
             var input = new PCInput();
             var dataLoader = new ScriptabeObjectDataLoader();
@@ -18,7 +18,9 @@ namespace Asteroids
             var lockableWeapon = new LockableWeapon(weaponModel);
 
             var shipFactory = new ShipFactory(dataLoader);
-            shipFactory.SetShip(PlayerShip.Base, lockableWeapon);
+            shipFactory.SetShip(type, lockableWeapon);
+            var playerView = shipFactory.GetView();
+            var playerModel = shipFactory.GetModel();
 
             var enemyFactory = new EnemyFactory(dataLoader);
             enemyFactory.Init(EnemyType.Asteroid);
@@ -29,9 +31,6 @@ namespace Asteroids
 
             var enemyspawnModel = new EnemySpawnModel();
 
-
-            var playerView = shipFactory.GetView();
-            var playerModel = shipFactory.GetModel();
 
             controllers
                 .Add(new PlayerMovementController(playerView, input, playerModel))
