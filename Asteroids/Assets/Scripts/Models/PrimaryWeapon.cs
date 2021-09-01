@@ -26,7 +26,7 @@ namespace Asteroids.Models
                 foreach (var muzzle in muzzles)
                 {
                     var bullet = (IProjectile)_ammoPool.GetItemAt(muzzle.position, muzzle.rotation);
-                    bullet.Launch(muzzle.up, _firePower);
+                    bullet.Launch(Vector2.up, _firePower);
                 }
                 _lastShotTime = Time.time;
             }
