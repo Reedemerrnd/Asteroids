@@ -3,11 +3,8 @@
 namespace Asteroids.Data
 
 {
-    public interface IDataLoader
+    internal interface IDataLoader : IShipLoader,IWeaponLoader, IEnemyLoader
     {
-        public EnemyData LoadEnemy(EnemyType enemyType);
-        public ShipData LoadShip(PlayerShip shipType);
-        public WeaponData LoadWeapon(WeaponType weaponType);
 
     }
 }

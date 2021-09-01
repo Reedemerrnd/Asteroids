@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Asteroids.Data
 {
-    public class ScriptabeObjectDataLoader : IDataLoader
+    internal sealed class ScriptabeObjectDataLoader : IDataLoader
     {
 
         public EnemyData LoadEnemy(EnemyType enemyType) => Resources.Load<EnemyData>(ResourcesPath.Enemies[enemyType]);

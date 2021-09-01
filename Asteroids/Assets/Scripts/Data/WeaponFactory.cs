@@ -12,9 +12,9 @@ namespace Asteroids.Data
     {
 
         private WeaponData _weapon;
-        private readonly IDataLoader _dataLoader;
+        private readonly IWeaponLoader _dataLoader;
 
-        public WeaponFactory(IDataLoader dataLoader)
+        public WeaponFactory(IWeaponLoader dataLoader)
         {
             _dataLoader = dataLoader;
         }

@@ -9,8 +9,11 @@ namespace Asteroids
     {
         public GameInitialize(Controllers controllers, PlayerShip type)
         {
+            //test
             var input = new PCInput();
+
             var dataLoader = new ScriptabeObjectDataLoader();
+            var jsonLoader = new JsonDataLoader();
 
             var weaponFactory = new WeaponFactory(dataLoader);
             weaponFactory.SetWeapon(WeaponType.Base);
@@ -22,7 +25,7 @@ namespace Asteroids
             var playerView = shipFactory.GetView();
             var playerModel = shipFactory.GetModel();
 
-            var enemyFactory = new EnemyFactory(dataLoader);
+            var enemyFactory = new EnemyFactory(jsonLoader);
             enemyFactory.Init(EnemyType.Asteroid);
             enemyFactory.Init(EnemyType.SmallAsteroid);
 

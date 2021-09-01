@@ -1,0 +1,1 @@
+[{"Type":"Asteroid","Health":20,"Damage":10,"Speed":700.0},{"Type":"SmallAsteroid","Health":10,"Damage":20,"Speed":1400.0}]
