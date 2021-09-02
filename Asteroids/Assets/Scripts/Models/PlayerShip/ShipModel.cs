@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Asteroids.Models
 {
     class ShipModel : IPlayerModel
     {
@@ -15,22 +15,7 @@ namespace Model
 
 
         public event Action OnDeath;
-        public int Health
-        {
-            get => _health;
-            set
-            {
-                _health += value;
-                if(_health <= 0)
-                {
-                    OnDeath?.Invoke();
-                }
-                else if (_health > _maxHealth)
-                {
-                    _health = _maxHealth;
-                }
-            }
-        }
+        public int Health => _health;
         public float Speed { get; }
         public float RotationSpeed { get; }
        
@@ -41,6 +26,15 @@ namespace Model
             _health = _maxHealth;
             Speed = speed;
             RotationSpeed = rotationSpeed;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            _health -= damage;
+            if(_health <= 0)
+            {
+                OnDeath?.Invoke();
+            }
         }
     }
 }

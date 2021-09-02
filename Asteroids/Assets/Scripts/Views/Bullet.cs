@@ -1,15 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace View
+namespace Asteroids.Views
 {
-    public class Bullet : MonoBehaviour, IBullet
+    internal sealed class Bullet : BaseAmunition, IPlayerProjectile
     {
-        public void Fire(Vector3 direction, float power = 100)
+        private int _damage;
+
+        public void SetDamage(int damage) => _damage = damage;
+
+        protected override void Interaction(Collider2D other)
         {
-            TryGetComponent<Rigidbody2D>(out var rigidbody);
-            rigidbody.AddForce(direction * power);
+            other.gameObject.TryGetComponent<ITakeDamage>(out var enemy);
+            enemy.TakeDamage(_damage);
+            Deactivate();
         }
     }
 }

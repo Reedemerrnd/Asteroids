@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace View
+namespace Asteroids.Views
 {
     public interface IRotate
     {

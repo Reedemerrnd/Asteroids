@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Asteroids.Models
 {
     public interface IHealthModel
     {
         public event Action OnDeath;
-        public int Health { get; set; }
+        public int Health { get;}
+        public void TakeDamage(int damage);
     }
 }

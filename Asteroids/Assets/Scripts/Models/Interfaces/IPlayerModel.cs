@@ -1,7 +1,7 @@
 
 using System;
 
-namespace Model
+namespace Asteroids.Models
 {
     public interface IPlayerModel : IFullMoveModel,IHealthModel
     {
