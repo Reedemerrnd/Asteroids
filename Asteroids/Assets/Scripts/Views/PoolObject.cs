@@ -10,19 +10,19 @@ namespace Asteroids.Views
 {
     internal abstract class PoolObject : BaseRigidbodyMovingObject, IPoolObject
     {
-        [SerializeField] private int _lifeTime;
+        private float _lifeTime;
         private IPoolObject _poolObject;
         private IPool _pool;
 
         public IPool Pool { set => _pool = value; }
-        public int LifeTime => _lifeTime;
         public GameObject GameObj => gameObject;
 
 
-        public virtual IPoolObject Activate()
+        public virtual IPoolObject Activate(float lifeTime)
         {
             gameObject.SetActive(true);
-            Invoke(nameof(Deactivate), LifeTime);
+            _lifeTime = lifeTime;
+            Invoke(nameof(Deactivate), _lifeTime);
             return this;
         }
 

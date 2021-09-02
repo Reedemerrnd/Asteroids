@@ -7,8 +7,7 @@ namespace Asteroids.Views
     public interface IPoolObject
     {
         public GameObject GameObj { get; }
-        public int LifeTime { get; }
-        public IPoolObject Activate();
+        public IPoolObject Activate(float lifeTime);
         public IPool Pool { set; }
     }
 }

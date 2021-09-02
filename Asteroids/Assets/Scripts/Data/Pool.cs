@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using Asteroids.Views;
 using System.Linq;
@@ -24,15 +24,13 @@ namespace Asteroids.Data
         }
         public IPoolObject GetItemAt(Vector3 position, Quaternion rotation)
         {
-            var obj = _poolStack.Count == 0 ? GameObject.Instantiate(_poolObject.GameObj) : _poolStack.Pop();
+            var obj = _poolStack.Count == 0 ? Object.Instantiate(_poolObject.GameObj) : _poolStack.Pop();
             obj.transform.position = position;
             obj.transform.rotation = rotation;
-            var result = obj.GetComponent<IPoolObject>().Activate();
+            var result = obj.GetComponent<IPoolObject>().Activate(3f); //magick number to remove
             result.Pool = this;
             return result;
         }
-
-        private GameObject GetObject() => _poolStack.Count == 0 ? GameObject.Instantiate(_poolObject.GameObj) : _poolStack.Pop();
 
         public void ReturnToPool(IPoolObject item) => _poolStack.Push(item.GameObj);
 

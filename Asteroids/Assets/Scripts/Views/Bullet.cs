@@ -10,9 +10,11 @@ namespace Asteroids.Views
 
         protected override void Interaction(Collider2D other)
         {
-            other.gameObject.TryGetComponent<ITakeDamage>(out var enemy);
-            enemy.TakeDamage(_damage);
-            Deactivate();
+            if (other.gameObject.TryGetComponent<ITakeDamage>(out var enemy))
+            {
+                enemy.TakeDamage(_damage);
+                Deactivate();
+            }
         }
     }
 }

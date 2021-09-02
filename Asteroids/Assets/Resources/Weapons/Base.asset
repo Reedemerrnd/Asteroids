@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57975b9575e5d8146bd37be35e276458, type: 3}
   m_Name: Base
   m_EditorClassIdentifier: 
+  bullet: {fileID: 11400000, guid: c7ec0dc72ca798645a59a8cfab6fefc4, type: 2}
   _firePower: 700
   _type: 1
   _ammoPrefab: {fileID: 906383608563434472, guid: cb15976e62bedf444a7e5b0b0dca37bc, type: 3}
   _fireRate: 5
-  _damage: 2
+  _damage: 10
