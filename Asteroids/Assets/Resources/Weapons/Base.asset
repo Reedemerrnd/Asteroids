@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57975b9575e5d8146bd37be35e276458, type: 3}
+  m_Name: Base
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 11400000, guid: c7ec0dc72ca798645a59a8cfab6fefc4, type: 2}
+  FirePower: 700
+  Type: 1
+  FireRate: 4

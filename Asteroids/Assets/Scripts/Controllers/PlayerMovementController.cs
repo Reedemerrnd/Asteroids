@@ -5,31 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using Controller;
 using UnityEngine;
-using View;
+using Asteroids.Views;
 using Inputs;
+using Asteroids.Models;
 
 namespace Controller
 {
     class PlayerMovementController : IController, IFixedExecute, IExecute
     {
-        private IFullMove _playerView;
-        private IInput _input;
+        private readonly IShip _playerView;
+        private readonly IInput _input;
+        private readonly IShipModel _playerModel;
 
-        public PlayerMovementController(IFullMove playerView, IInput input)
+        public PlayerMovementController(IShip playerView, IInput input, IShipModel playerModel)
         {
             _playerView = playerView;
             _input = input;
+            _playerModel = playerModel;
         }
 
         public void FixedExecute()
         {
-            _playerView.Move(_input.Axes * 10f);
+            _playerModel.Movement.Move(_playerView.MoveComponent, _input.Thrust, _playerModel.Speed);
         }
 
         public void Execute()
         {
-            Debug.Log(_input.MousePosition);
-            _playerView.SetLook(_input.MousePosition);
+            _playerModel.Movement.Rotate(_playerView.MoveComponent.transform, _input.Rotation, _playerModel.RotationSpeed);
         }
     }
 }
