@@ -6,21 +6,13 @@ namespace Controller
 {
     public class GameController : MonoBehaviour
     {
-        #region Fields
-
-        
-
         private Controllers _controllers;
-
-        #endregion
-
-
-        #region UnityMethods
 
         private void Start()
         {
             _controllers = new Controllers();
-            new GameInitialize(_controllers);
+            //Facade ?
+            new GameInitialize(_controllers, PlayerShip.Base);
             _controllers.Initialize();
             _controllers.AddGameStateHandlers();
         }
@@ -45,8 +37,6 @@ namespace Controller
             _controllers.Disable();
             _controllers.RemoveGameStateHandlers();
         }
-
-        #endregion
 
     }
 }

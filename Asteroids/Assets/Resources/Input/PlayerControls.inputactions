@@ -25,7 +25,15 @@
                     "name": "Thrust",
                     "type": "Value",
                     "id": "7f734018-69a6-418b-b1ba-e0ccb9fb9860",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Controls",
+                    "type": "Button",
+                    "id": "be833cb4-869c-458c-ac8e-24be0572764f",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 }
@@ -46,6 +54,17 @@
                     "name": "",
                     "id": "00d9ce87-0fcf-4821-b572-322a3216daeb",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FIre",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6fd64ea1-25c7-4bc9-bf7a-ef07794f4b99",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -120,9 +139,20 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
+                    "name": "",
+                    "id": "682b6ea0-7f30-4afd-88a5-15673b897fd7",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "Invert,Normalize(min=-1,max=1)",
+                    "groups": "",
+                    "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
                     "id": "c5f5d30c-e8aa-47db-8ec0-0d5df081c07f",
-                    "path": "1DAxis",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -131,19 +161,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
+                    "name": "Up",
                     "id": "57ba25a9-04a3-4c42-a6ce-be37dc445c89",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Thrust",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "b0eb7584-5d8a-40dd-a6d8-a1f3ee551882",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -153,9 +172,42 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
+                    "name": "Down",
+                    "id": "b0eb7584-5d8a-40dd-a6d8-a1f3ee551882",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "bf61684a-9afa-4b7d-9443-264a8a536c5a",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "fe95c4d2-dff6-4198-a4f9-b5514a900ba9",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
                     "id": "291ea9ce-1ed5-41ef-af10-e2651634491b",
-                    "path": "1DAxis",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -164,9 +216,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
+                    "name": "Up",
                     "id": "a827dc2b-7963-4141-8a27-a2304d45729a",
-                    "path": "<Gamepad>/leftStick/down",
+                    "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -175,15 +227,48 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
+                    "name": "Down",
                     "id": "bd0a0812-6aa2-4f4f-b151-539b6f45c317",
-                    "path": "<Gamepad>/leftStick/up",
+                    "path": "<XInputController>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Thrust",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "Left",
+                    "id": "51b16e18-c65b-4d2c-a516-5568ed67e3dd",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "df8fa7e0-8f34-46ce-af5c-7f39eb86165b",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Thrust",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "be57a5f8-093b-41a0-acaa-3c12552d807a",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Controls",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

@@ -5,19 +5,20 @@ using UnityEngine.InputSystem;
 
 namespace Inputs
 {
-    public class PCInput : IInput
+    public class PCInput : IInput, IDisposable
     {
-        public event Action OnFire;
         private InputActionAsset _actions;
 
         private InputAction _rotation;
+        private InputAction _controls;
         private InputAction _thrust;
         private InputAction _fire;
 
-        public float Rotation => _rotation.ReadValue<float>();
-        public float Thrust => _thrust.ReadValue<float>();
-        
 
+        public float Rotation => _rotation.ReadValue<float>();
+        public Vector2 Thrust => _thrust.ReadValue<Vector2>();
+        public bool FireHold => _fire.ReadValue<float>() > 0;
+        public event Action OnLockPressed; 
         public PCInput()
         {
             var file = File.ReadAllText(@"Assets/Resources/Input/PlayerControls.inputactions");
@@ -26,13 +27,19 @@ namespace Inputs
             _fire = _actions.FindAction("Fire");
             _thrust = _actions.FindAction("Thrust");
             _rotation = _actions.FindAction("Rotation");
-            _fire.started += Fire;
+            _controls = _actions.FindAction("Controls");
+
+            _controls.performed += LockPressed;
         }
 
-        private void Fire(InputAction.CallbackContext context)
+        private void LockPressed(InputAction.CallbackContext ctx)
         {
-            OnFire?.Invoke();
+            OnLockPressed?.Invoke();
         }
-        
+
+        public void Dispose()
+        {
+            _controls.performed -= LockPressed;
+        }
     }
 }

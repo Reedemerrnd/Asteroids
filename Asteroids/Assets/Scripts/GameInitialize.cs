@@ -1,24 +1,31 @@
+using Asteroids.Data;
+using Asteroids.Models;
 using Controller;
 using Inputs;
-using System.Linq;
-using Asteroids.Models;
-using Asteroids.Data;
-using Asteroids.Views;
-using UnityEngine;
 
 namespace Asteroids
 {
     public class GameInitialize
     {
-        public GameInitialize(Controllers controllers)
+        public GameInitialize(Controllers controllers, PlayerShip type)
         {
+            //test
             var input = new PCInput();
+
             var dataLoader = new ScriptabeObjectDataLoader();
+            var jsonLoader = new JsonDataLoader();
+
+            var weaponFactory = new WeaponFactory(dataLoader);
+            weaponFactory.SetWeapon(WeaponType.Base);
+            var weaponModel = weaponFactory.GetModel();
+            var lockableWeapon = new LockableWeapon(weaponModel);
 
             var shipFactory = new ShipFactory(dataLoader);
-            shipFactory.SetShip(PlayerShip.Base);
+            shipFactory.SetShip(type, lockableWeapon);
+            var playerView = shipFactory.GetView();
+            var playerModel = shipFactory.GetModel();
 
-            var enemyFactory = new EnemyFactory(dataLoader);
+            var enemyFactory = new EnemyFactory(jsonLoader);
             enemyFactory.Init(EnemyType.Asteroid);
             enemyFactory.Init(EnemyType.SmallAsteroid);
 
@@ -27,19 +34,12 @@ namespace Asteroids
 
             var enemyspawnModel = new EnemySpawnModel();
 
-            var weaponFactory = new WeaponFactory(dataLoader);
-            weaponFactory.SetWeapon(WeaponType.Base);
-            var mainWeaponAmmoPool = weaponFactory.GetView();
-            var weaponModel = weaponFactory.GetModel();
-
-            var playerView = shipFactory.GetView();
-            var playerModel = shipFactory.GetModel();
 
             controllers
                 .Add(new PlayerMovementController(playerView, input, playerModel))
-                .Add(new WeaponController(playerView, weaponModel, input, mainWeaponAmmoPool))
+                .Add(new WeaponController(playerView, lockableWeapon, input))
                 .Add(new EnemySpawnController(enemyPoolSet,enemyModels, enemyspawnModel))
-                .Add(new DamageController(playerView, playerModel))
+                .Add(new DamageController(playerView, playerModel.Health))
                 ;
 
         }

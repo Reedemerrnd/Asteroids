@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64f4dd1d1d333ee419fc600b8b0fa493, type: 3}
   m_Name: Base
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 4324294861409646798, guid: b545f813f424d39489e0500aba4956de, type: 3}
-  _speed: 10
-  _type: 1
-  _maxHealth: 100
-  _rotationSpeed: 0.6
+  Type: 1
+  Prefab: {fileID: 4324294861409646798, guid: b545f813f424d39489e0500aba4956de, type: 3}
+  Speed: 50
+  RotationSpeed: 1
+  MaxHealth: 100

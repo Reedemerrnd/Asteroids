@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Asteroids.Data 
-{ 
+namespace Asteroids.Data
+{
     public static class BuilderExtension2D
     {
         public static T GetOrAddComponent<T>(this GameObject obj) where T : Component
@@ -38,7 +33,7 @@ namespace Asteroids.Data
             rigidbody.gravityScale = gravityScale;
             return obj;
         }
-        public static GameObject AddRigidBody2D(this GameObject obj,float mass)
+        public static GameObject AddRigidBody2D(this GameObject obj, float mass)
         {
             obj.GetOrAddComponent<Rigidbody2D>().mass = mass;
             return obj;
@@ -50,7 +45,7 @@ namespace Asteroids.Data
             return obj;
         }
 
-        public static GameObject SetScale(this GameObject obj,Vector3 scale)
+        public static GameObject SetScale(this GameObject obj, Vector3 scale)
         {
             obj.transform.localScale = scale;
             return obj;

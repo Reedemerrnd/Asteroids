@@ -1,50 +1,49 @@
-﻿using System;
+﻿using Asteroids.Models;
 using Asteroids.Views;
-using Asteroids;
 using Inputs;
-using Asteroids.Models;
-using Asteroids.Data;
-using UnityEngine;
-using System.Collections.Generic;
 
 
 namespace Controller
 {
-    class WeaponController : IController, IInitialize, IDisable
+    class WeaponController : IController, IInitialize, IExecute, IDisable
     {
-        private IShoot _view;
+        private IShip _view;
         private IWeaponModel _weapon;
         private IInput _input;
-        private IPool _ammoPool;
 
-        public WeaponController(IShoot view, IWeaponModel weapon, IInput input, IPool ammoPool)
+        public WeaponController(IShip view, IWeaponModel weapon, IInput input)
         {
             _view = view;
             _weapon = weapon;
             _input = input;
-            _ammoPool = ammoPool;
         }
 
-        // Inplement firerate
-        private void Shoot()
+
+        public void Init()
         {
-            foreach (var muzzle in _view.MuzzlesTransform)
+            _input.OnLockPressed += LockWeapon;
+        }
+
+        public void Execute()
+        {
+            if (_input.FireHold)
             {
-                var bulletPrefab = _ammoPool.GetItemAt(muzzle.transform.position, muzzle.rotation).GameObj;
-                var bullet = bulletPrefab.GetComponent<Bullet>();
-                bullet.Move(AxisManager.POSITIVE, _weapon.FirePower);
-                bullet.SetDamage(_weapon.Damage);
+                _weapon.Shoot(_view.Barrels);
             }
+        }
+
+        private void LockWeapon()
+        {
+            if (_weapon is ILockable lockable)
+            {
+                lockable.SwitchLock();
+            }
+
         }
 
         public void Disable()
         {
-            _input.OnFire -= Shoot;
-        }
-
-        public void Init()
-        {
-            _input.OnFire += Shoot;
+            _input.OnLockPressed -= LockWeapon;
         }
     }
 }

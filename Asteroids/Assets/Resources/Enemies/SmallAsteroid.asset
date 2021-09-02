@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed68e9db7502d534386605fa4c1f8a75, type: 3}
   m_Name: SmallAsteroid
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 7433764594858399906, guid: 774787a82f27c1f44bedc28413c9c4ba, type: 3}
-  _speed: 1000
-  _type: 3
-  _maxHealth: 10
-  _damage: 10
+  Type: 3
+  Prefab: {fileID: 7433764594858399906, guid: 774787a82f27c1f44bedc28413c9c4ba, type: 3}
+  MaxHealth: 10
+  Damage: 20
+  Speed: 1000

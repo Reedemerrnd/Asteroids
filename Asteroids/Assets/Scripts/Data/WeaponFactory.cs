@@ -8,36 +8,43 @@ using Asteroids.Views;
 
 namespace Asteroids.Data
 {
-    internal class WeaponFactory : AbstractFactory<IWeaponModel, IPool>
+    internal class WeaponFactory
     {
 
-        private IWeaponData _weapon;
+        private WeaponData _weapon;
+        private readonly IWeaponLoader _dataLoader;
 
-        public WeaponFactory(IDataLoader dataLoader) : base(dataLoader)
+        public WeaponFactory(IWeaponLoader dataLoader)
         {
-
+            _dataLoader = dataLoader;
         }
+
         public void SetWeapon(WeaponType weaponType)
         {
             _weapon = _dataLoader.LoadWeapon(weaponType);
         }
 
 
-        public override IWeaponModel GetModel()
+        public IWeaponModel GetModel()
         {
-            return new PrimaryWeapon(_weapon.FireRate, _weapon.FirePower, _weapon.Damage);
+            Bullet bulletprefab = BuildBullet();
+            var ammoPool = new Pool(bulletprefab);
+            return new PrimaryWeapon(_weapon.FireRate, _weapon.FirePower, ammoPool);
         }
 
-        public override IPool GetView()
+        private Bullet BuildBullet()
         {
-            var bulletprefab = new GameObject(_weapon.Bullet.Name).SetSprite(_weapon.Bullet.Image)
-                                                                  .AddRigidBody2D(1f,0f)
-                                                                  .SetCollider<CircleCollider2D>(true)
-                                                                  .SetScale(_weapon.Bullet.Scale)
-                                                                  .GetOrAddComponent<Bullet>()
-                                                                  ;
+            var bulletprefab = new GameObject(_weapon.Bullet.Name)
+                .SetSprite(_weapon.Bullet.Image)
+                .AddRigidBody2D(1f, 0f)
+                .SetCollider<CircleCollider2D>(true)
+                .SetScale(_weapon.Bullet.Scale)
+                .GetOrAddComponent<Bullet>()
+                ;
             bulletprefab.gameObject.SetActive(false);
-            return new Pool(bulletprefab);
+            bulletprefab.SetDamage(_weapon.Bullet.Damage);
+            bulletprefab.Inject(new OneAxisMove());
+            return bulletprefab;
         }
     }
 }
