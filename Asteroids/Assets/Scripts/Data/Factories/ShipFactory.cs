@@ -24,9 +24,14 @@ namespace Asteroids.Data
         public IShipModel GetModel()
         {
             var ship = new NewShipModel(_data.Speed, _data.RotationSpeed);
-            ship.Inject(new HealthModel(_data.MaxHealth));
-            ship.Inject(new TwoAxisMoveAndRotate());
-            ship.Inject(_weaponModel);
+            var shipModification = new ShipModifier(ship);
+            shipModification.Add(new BaseHealthModifier(ship, _data.MaxHealth));
+            shipModification.Add(new BaseTwoAxisMoveModifier(ship));
+            shipModification.Add(new WeaponModifier(ship, _weaponModel));
+            shipModification.Handle();
+            //ship.Inject(new HealthModel(_data.MaxHealth));
+            //ship.Inject(new TwoAxisMoveAndRotate());
+            //ship.Inject(_weaponModel);
 
             return ship;
         }
@@ -36,5 +41,6 @@ namespace Asteroids.Data
             var view = Object.Instantiate(_data.Prefab, Vector3.zero, Quaternion.identity);
             return view.GetComponent<IShip>();
         }
+
     }
 }
