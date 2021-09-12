@@ -1,9 +1,7 @@
-using System;
 using Asteroids.Core;
 using Asteroids.Models;
 using Asteroids.Views;
 using Inputs;
-using UnityEngine;
 
 namespace Controller
 {
@@ -50,7 +48,7 @@ namespace Controller
         private void AbilityOneUse()
         {
             var warp = _shipModel.GetAbility(AbilityName.Warp);
-            if(warp != null)
+            if (warp != null)
             {
                 _view.MoveComponent.transform.position = ScreenBounds.GetRandomPointInBounds();
             }

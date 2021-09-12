@@ -1,9 +1,4 @@
-﻿using System;
-using Asteroids.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Asteroids.Data;
 
 namespace Asteroids.Models
 {
@@ -11,5 +6,6 @@ namespace Asteroids.Models
     {
         public EnemyType enemyType { get; }
         public int Health { get; }
+        public int Score { get; }
     }
 }

@@ -1,27 +1,28 @@
-﻿
+﻿using Asteroids.Views;
 using System.Collections.Generic;
-using Asteroids.Views;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Asteroids.Data
 {
     public class Pool : IPool
     {
-        IPoolObjectPrototype _poolObject;
+        private IPoolObjectPrototype _poolObject;
 
         private Stack<GameObject> _poolStack;
+
+
         public Pool(IPoolObjectPrototype poolObject)
         {
             _poolObject = poolObject;
             _poolStack = new Stack<GameObject>();
         }
+
+
         public IPoolObjectPrototype GetItem()
         {
             return GetItemAt(Vector3.zero, Quaternion.identity);
         }
+
         public IPoolObjectPrototype GetItemAt(Vector3 position, Quaternion rotation)
         {
             var obj = _poolStack.Count == 0 ? _poolObject.Clone() : _poolStack.Pop();

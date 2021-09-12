@@ -1,4 +1,5 @@
 using UnityEngine;
+using Asteroids.Core;
 
 namespace Asteroids
 {

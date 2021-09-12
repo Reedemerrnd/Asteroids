@@ -15,6 +15,13 @@ namespace Asteroids.Views
         public override void Cancel() => gameObject.SetActive(false);
         public override void Execute() => gameObject.SetActive(true);
 
+
+        private void Start()
+        {
+            SetScore("0");
+        }
+
+
         public void SetHp(string health) => _healthText.text = "Health: " + health;
         public void SetScore(string score) => _scoreText.text = "Score: " + score;
         public void ShowLog(string message)
@@ -23,7 +30,6 @@ namespace Asteroids.Views
             _logText.text = message;
             Invoke(nameof(ClearLog), _logClearDelay);
         }
-
 
         private void ClearLog()
         {

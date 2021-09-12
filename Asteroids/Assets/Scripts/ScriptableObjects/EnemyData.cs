@@ -7,6 +7,7 @@ namespace Asteroids.Data
     {
         public EnemyType Type;
         public GameObject Prefab;
+        public int Score;
         public int MaxHealth;
         public int Damage;
         public float Speed;

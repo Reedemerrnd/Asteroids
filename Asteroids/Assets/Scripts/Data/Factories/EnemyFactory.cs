@@ -1,14 +1,9 @@
-﻿using System;
+﻿using Asteroids.Models;
 using Asteroids.Views;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Asteroids.Models;
 
 namespace Asteroids.Data
 {
-    internal class EnemyFactory : IFactory<IEnemyModelSet,IPoolSet<EnemyType>>
+    internal class EnemyFactory : IFactory<IEnemyModelSet, IPoolSet<EnemyType>>
     {
         private PoolSet<EnemyType> _poolSet;
         private EnemyModelSet _models;
@@ -21,13 +16,13 @@ namespace Asteroids.Data
             _models = new EnemyModelSet();
         }
 
-        public  void Init(EnemyType type)
+        public void Init(EnemyType type)
         {
             var data = _dataLoader.LoadEnemy(type);
             data.Prefab.GetComponent<IInjectable<IMoveVariant>>().Inject(new OneAxisMove());
             var pool = new Pool(data.Prefab.GetComponent<IPoolObjectPrototype>());
             _poolSet.Add(type, pool);
-            _models.Add(type, new EnemyModel(data.Type, data.MaxHealth, data.Damage, data.Speed));
+            _models.Add(type, new EnemyModel(data.Type, data.MaxHealth, data.Damage, data.Speed, data.Score));
         }
 
         public IPoolSet<EnemyType> GetView() => _poolSet;
