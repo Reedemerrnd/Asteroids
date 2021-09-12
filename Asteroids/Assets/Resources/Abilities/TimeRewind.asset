@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64f4dd1d1d333ee419fc600b8b0fa493, type: 3}
-  m_Name: Base
+  m_Script: {fileID: 11500000, guid: 93c0651b7cfb79241ada4786099c2018, type: 3}
+  m_Name: TimeRewind
   m_EditorClassIdentifier: 
   Type: 1
-  Prefab: {fileID: 4324294861409646798, guid: b545f813f424d39489e0500aba4956de, type: 3}
-  Speed: 35
-  RotationSpeed: 1
-  MaxHealth: 100
+  Name: 3
+  Value: 2

@@ -13,12 +13,17 @@ namespace Inputs
         private InputAction _controls;
         private InputAction _thrust;
         private InputAction _fire;
+        private InputAction _abilityOne;
+        private InputAction _abilityTwo;
 
 
         public float Rotation => _rotation.ReadValue<float>();
         public Vector2 Thrust => _thrust.ReadValue<Vector2>();
         public bool FireHold => _fire.ReadValue<float>() > 0;
-        public event Action OnLockPressed; 
+        public event Action OnLockPressed;
+        public event Action OnAbilityOne;
+        public event Action OnAbilityTwo;
+
         public PCInput()
         {
             var file = File.ReadAllText(@"Assets/Resources/Input/PlayerControls.inputactions");
@@ -28,9 +33,16 @@ namespace Inputs
             _thrust = _actions.FindAction("Thrust");
             _rotation = _actions.FindAction("Rotation");
             _controls = _actions.FindAction("Controls");
+            _abilityOne = _actions.FindAction("AbilityOne");
+            _abilityTwo = _actions.FindAction("AbilityTwo");
 
             _controls.performed += LockPressed;
+            _abilityOne.performed += AbilityOne_performed;
+            _abilityTwo.performed += AbilityTwo_performed;
         }
+
+        private void AbilityTwo_performed(InputAction.CallbackContext obj) => OnAbilityTwo?.Invoke();
+        private void AbilityOne_performed(InputAction.CallbackContext obj) => OnAbilityOne?.Invoke();
 
         private void LockPressed(InputAction.CallbackContext ctx)
         {
@@ -40,6 +52,8 @@ namespace Inputs
         public void Dispose()
         {
             _controls.performed -= LockPressed;
+            _abilityOne.performed -= AbilityOne_performed;
+            _abilityTwo.performed -= AbilityTwo_performed;
         }
     }
 }

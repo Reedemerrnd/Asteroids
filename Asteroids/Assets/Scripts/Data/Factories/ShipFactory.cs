@@ -29,6 +29,10 @@ namespace Asteroids.Data
             shipModification.Add(new BaseTwoAxisMoveModifier(ship));
             shipModification.Add(new WeaponModifier(ship, _weaponModel));
             shipModification.Handle();
+            var abilityLoader = new AbilityLoader();
+            ship.AddAbility(abilityLoader.GetAbility("Warp"));
+            ship.AddAbility(abilityLoader.GetAbility("TimeRewind"));
+            ship.AddAbility(abilityLoader.GetAbility("SpeedUp"));
             //ship.Inject(new HealthModel(_data.MaxHealth));
             //ship.Inject(new TwoAxisMoveAndRotate());
             //ship.Inject(_weaponModel);

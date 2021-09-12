@@ -38,10 +38,9 @@ namespace Asteroids
             controllers
                 .Add(new PlayerMovementController(playerView, input, playerModel))
                 .Add(new WeaponController(playerView, lockableWeapon, input))
-                .Add(new EnemySpawnController(enemyPoolSet,enemyModels, enemyspawnModel))
+                .Add(new EnemySpawnController(enemyPoolSet, enemyModels, enemyspawnModel))
                 .Add(new DamageController(playerView, playerModel.Health))
-                ;
-
+                .Add(new AbilityController(playerModel, playerView, input));
         }
     }
 }
