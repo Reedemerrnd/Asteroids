@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Controller
 {
-    public class EnemySpawnController : IController, IInitialize, IExecute
+    public class EnemySpawnController : IController, IAwakeInitialize, IExecute
     {
         private IPoolSet<EnemyType> _enemyPool;
         private IEnemyModelSet _enemyModels;
@@ -48,7 +48,7 @@ namespace Controller
 
         private float Randomize(float min, float max) => UnityEngine.Random.Range(min, max);
 
-        public void Init() => _time = Time.time;
+        public void AwakeInit() => _time = Time.time;
         public void Execute()
         {
             var delay = Randomize(_spawnModel.MinDelay, _spawnModel.MaxDelay);

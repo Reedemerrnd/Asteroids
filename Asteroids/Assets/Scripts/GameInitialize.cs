@@ -34,8 +34,11 @@ namespace Asteroids
 
             var enemyspawnModel = new EnemySpawnModel();
 
+            var uiFactory = new UIFactory(dataLoader);
 
             controllers
+                .Add(new GamePauseController())
+                .Add(new UIController(uiFactory.GetInGameUI(), uiFactory.GetMainMenu(), playerModel))
                 .Add(new PlayerMovementController(playerView, input, playerModel))
                 .Add(new WeaponController(playerView, lockableWeapon, input))
                 .Add(new EnemySpawnController(enemyPoolSet, enemyModels, enemyspawnModel))

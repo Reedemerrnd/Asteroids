@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Controller
 {
-    class DamageController : IController, IInitialize, IDisable
+    class DamageController : IController, IAwakeInitialize, IDisable
     {
         private readonly IShip _playerView;
         private readonly IHealthModel _playerHealthModel;
@@ -18,10 +18,9 @@ namespace Controller
         private void ProcessPlayerDamage(int damage)
         {
             _playerHealthModel.TakeDamage(damage);
-            Debug.Log(_playerHealthModel.Health);
         }
 
-        public void Init()
+        public void AwakeInit()
         {
             _playerView.OnDamageTaken += ProcessPlayerDamage;
         }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asteroids
@@ -20,10 +18,10 @@ namespace Asteroids
         private void Start()
         {
             var interpreter = new NumberCut();
-            Debug.Log($"2 223 000 000 000  : {interpreter.Interpret(2223000000000)}");
-            Debug.Log($"223 000 000 000  : {interpreter.Interpret(223000000000)}");
-            Debug.Log($"22 000 000  : {interpreter.Interpret(22000000)}");
-            Debug.Log($"1 000  : {interpreter.Interpret(1000)}");
+            //Debug.Log($"2 223 000 000 000  : {interpreter.Interpret(2223000000000)}");
+            //Debug.Log($"223 000 000 000  : {interpreter.Interpret(223000000000)}");
+            //Debug.Log($"22 000 000  : {interpreter.Interpret(22000000)}");
+            //Debug.Log($"1 000  : {interpreter.Interpret(1000)}");
         }
     }
 }

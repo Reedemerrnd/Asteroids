@@ -6,13 +6,14 @@ namespace Controller
     {
         #region Fields
 
-        private List<IInitialize> _onAwakes;
+        private List<IAwakeInitialize> _onAwakes;
+        private List<IStartInitialize> _onStarts;
         private List<IExecute> _onUpdates;
         private List<ILateExecute> _onLateUpdates;
         private List<IFixedExecute> _onFixedUpdates;
         private List<IDisable> _onDisables;
-        private List<IChangeGameState> _refreshInitilizers;
-        private List<IGameStateHandler> _refreshables;
+        private List<IChangeGameState> _gameStateChangers;
+        private List<IGameStateHandler> _gameStateHAndlers;
 
 
         #endregion
@@ -22,13 +23,14 @@ namespace Controller
 
         public Controllers()
         {
-            _onAwakes = new List<IInitialize>();
+            _onAwakes = new List<IAwakeInitialize>();
+            _onStarts = new List<IStartInitialize>();
             _onFixedUpdates = new List<IFixedExecute>();
             _onLateUpdates = new List<ILateExecute>();
             _onUpdates = new List<IExecute>();
             _onDisables = new List<IDisable>();
-            _refreshInitilizers = new List<IChangeGameState>();
-            _refreshables = new List<IGameStateHandler>();
+            _gameStateChangers = new List<IChangeGameState>();
+            _gameStateHAndlers = new List<IGameStateHandler>();
         }
 
         #endregion
@@ -38,7 +40,7 @@ namespace Controller
 
         public Controllers Add(IController controller)
         {
-            if (controller is IInitialize onAwake)
+            if (controller is IAwakeInitialize onAwake)
             {
                 _onAwakes.Add(onAwake);
             }
@@ -60,20 +62,32 @@ namespace Controller
             }
             if (controller is IChangeGameState initializer)
             {
-                _refreshInitilizers.Add(initializer);
+                _gameStateChangers.Add(initializer);
             }
-            if (controller is IGameStateHandler refreshable)
+            if (controller is IGameStateHandler stateHandlers)
             {
-                _refreshables.Add(refreshable);
+                _gameStateHAndlers.Add(stateHandlers);
+            }
+            if (controller is IStartInitialize startInitialize)
+            {
+                _onStarts.Add(startInitialize);
             }
             return this;
         }
 
-        public void Initialize()
+        public void AwakeInitialize()
         {
             foreach (var controller in _onAwakes)
             {
-                controller.Init();
+                controller.AwakeInit();
+            }
+        }
+
+        public void StartInitialize()
+        {
+            foreach (var controller in _onStarts)
+            {
+                controller.StartInit();
             }
         }
 
@@ -111,22 +125,22 @@ namespace Controller
 
         public void AddGameStateHandlers()
         {
-            foreach (var controller in _refreshInitilizers)
+            foreach (var controller in _gameStateChangers)
             {
-                foreach (var refreshable in _refreshables)
+                foreach (var stateHandlers in _gameStateHAndlers)
                 {
-                    controller.OnGameStateChanged += refreshable.UpdateState;
+                    controller.OnGameStateChanged += stateHandlers.UpdateState;
                 }
             }
         }
 
         public void RemoveGameStateHandlers()
         {
-            foreach (var controller in _refreshInitilizers)
+            foreach (var controller in _gameStateChangers)
             {
-                foreach (var refreshable in _refreshables)
+                foreach (var stateHandlers in _gameStateHAndlers)
                 {
-                    controller.OnGameStateChanged -= refreshable.UpdateState;
+                    controller.OnGameStateChanged -= stateHandlers.UpdateState;
                 }
             }
         }

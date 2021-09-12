@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Controller
 {
-    internal class AbilityController : IController, IInitialize, IDisable
+    internal class AbilityController : IController, IAwakeInitialize, IDisable
     {
         private readonly IShipModel _shipModel;
         private readonly IShip _view;
@@ -21,7 +21,7 @@ namespace Controller
             _input = input;
         }
 
-        public void Init()
+        public void AwakeInit()
         {
             InitPassivses();
             _input.OnAbilityOne += AbilityOneUse;
@@ -38,7 +38,6 @@ namespace Controller
                     {
                         case AbilityName.SpeedUp:
                             _shipModel.AddSpeed(ability.Value);
-                            Debug.Log("speedUp");
                             break;
                         default:
                             break;

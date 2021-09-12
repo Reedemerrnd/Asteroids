@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Controller;
-using UnityEngine;
+﻿using Asteroids.Models;
 using Asteroids.Views;
 using Inputs;
-using Asteroids.Models;
 
 namespace Controller
 {

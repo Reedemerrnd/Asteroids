@@ -8,5 +8,6 @@ namespace Asteroids.Models
         public int Health { get; }
         public void TakeDamage(int damage);
         public void ResetHealth();
+        public event Action<int> OnHealthChanged;
     }
 }
