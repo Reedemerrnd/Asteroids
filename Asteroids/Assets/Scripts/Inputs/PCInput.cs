@@ -18,7 +18,7 @@ namespace Inputs
 
 
         public float Rotation => _rotation.ReadValue<float>();
-        public Vector2 Thrust => _thrust.ReadValue<Vector2>();
+        public (float, float) Thrust => GetThrust();
         public bool FireHold => _fire.ReadValue<float>() > 0;
         public event Action OnLockPressed;
         public event Action OnAbilityOne;
@@ -47,6 +47,12 @@ namespace Inputs
         private void LockPressed(InputAction.CallbackContext ctx)
         {
             OnLockPressed?.Invoke();
+        }
+
+        public (float, float) GetThrust()
+        {
+            var vector = _thrust.ReadValue<Vector2>();
+            return (vector.x, vector.y);
         }
 
         public void Dispose()

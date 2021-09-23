@@ -32,9 +32,11 @@ namespace Controller
             var enemyView = enemy.GetComponent<IEnemy>();
             enemyView.Health = _enemyModels[enemyView.Type].Health;
             enemyView.SetDamage(_enemyModels[type].Damage);
-            _mediator.Activate(enemyView);
             enemy.transform.position = position;
+
             enemyView.Launch(Vector2.down, _enemyModels[type].Speed);
+
+            _mediator.Activate(enemyView);
         }
 
         private void SpawnEnemy()

@@ -50,7 +50,7 @@ namespace Controller
             var warp = _shipModel.GetAbility(AbilityName.Warp);
             if (warp != null)
             {
-                _view.MoveComponent.transform.position = ScreenBounds.GetRandomPointInBounds();
+                _view.Teleport(ScreenBounds.GetRandomPointInBounds());
             }
         }
 

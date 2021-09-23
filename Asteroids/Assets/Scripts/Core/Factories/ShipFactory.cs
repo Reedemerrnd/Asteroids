@@ -26,7 +26,6 @@ namespace Asteroids.Data
             var ship = new NewShipModel(_data.Speed, _data.RotationSpeed);
             var shipModification = new ShipModifier(ship);
             shipModification.Add(new BaseHealthModifier(ship, _data.MaxHealth));
-            shipModification.Add(new BaseTwoAxisMoveModifier(ship));
             shipModification.Add(new WeaponModifier(ship, _weaponModel));
             shipModification.Handle();
             var abilityLoader = new AbilityLoader();

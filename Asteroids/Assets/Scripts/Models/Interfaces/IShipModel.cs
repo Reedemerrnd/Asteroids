@@ -2,7 +2,7 @@
 
 namespace Asteroids.Models
 {
-    internal interface IShipModel : ICanMoveAndRotate, ICanShoot, IHaveHealth, IAbilityEnumerator
+    internal interface IShipModel : ICanShoot, IHaveHealth, IAbilityEnumerator
     {
         public float Speed { get; }
         public void AddSpeed(float speed);

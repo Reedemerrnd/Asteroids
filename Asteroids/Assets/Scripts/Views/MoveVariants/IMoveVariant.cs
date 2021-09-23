@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Asteroids.Models
+namespace Asteroids.Views
 {
     public interface IMoveVariant
     {

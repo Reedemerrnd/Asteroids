@@ -1,8 +1,10 @@
 using Asteroids.Core;
 using Asteroids.Data;
 using Asteroids.Models;
+using Asteroids.Core.States;
 using Controller;
 using Inputs;
+using Asteroids.Views;
 
 namespace Asteroids
 {
@@ -24,6 +26,10 @@ namespace Asteroids
             shipFactory.SetShip(type, lockableWeapon);
             var playerView = shipFactory.GetView();
             var playerModel = shipFactory.GetModel();
+
+            var shipStateHandler = new ShipStateHandler(new NormalState(new HealthyShipMovement()),
+                                                        new DamagedState(new DamagedShipMovement(0.4f)),
+                                                        new HeavilyDamagedState(new HeavilyDamagedShipMovement(0.4f, 0.3f)));
 
             var enemyFactory = new EnemyFactory(dataLoader);
             enemyFactory.Init(EnemyType.Asteroid);
@@ -47,7 +53,8 @@ namespace Asteroids
                 .Add(new WeaponController(playerView, lockableWeapon, input))
                 .Add(new EnemySpawnController(enemyPoolSet, enemyModels, enemyspawnModel, enemySpawnVisitMediator))
                 .Add(new DamageController(playerView, playerModel.Health))
-                .Add(new AbilityController(playerModel, playerView, input));
+                .Add(new AbilityController(playerModel, playerView, input))
+                .Add(new ShipStateController(playerView, playerModel, shipStateHandler));
         }
     }
 }

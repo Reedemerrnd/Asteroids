@@ -9,14 +9,12 @@ namespace Asteroids.Models
         private float _rotationSpeed;
         private List<Ability> _abilities;
 
-        private IMoveAndRotateVariant _move;
         private IWeaponModel _weapon;
         private IHealthModel _health;
 
 
         public float Speed => _speed;
         public float RotationSpeed => _rotationSpeed;
-        public IMoveAndRotateVariant Movement => _move;
         public IWeaponModel Weapon => _weapon;
         public IHealthModel Health => _health;
 
@@ -29,8 +27,6 @@ namespace Asteroids.Models
             _abilities = new List<Ability>(10);
         }
 
-
-        public void Inject(IMoveAndRotateVariant dependency) => _move = dependency;
 
         public void Inject(IWeaponModel dependency) => _weapon = dependency;
 
