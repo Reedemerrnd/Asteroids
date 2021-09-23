@@ -1,10 +1,11 @@
 ﻿using Asteroids.Data;
 using Asteroids.Models;
+using Asteroids.Views;
 using System;
 
-namespace Controller
+namespace Asteroids.Core
 {
-    class EnemyDeathObserver : IObserver<EnemyDeathInfo>
+    internal sealed class EnemyDeathObserver : IObserver<EnemyDeathInfo>, IVisitor
     {
         private readonly IEnemyModelSet _enemyModelSet;
 
@@ -22,5 +23,9 @@ namespace Controller
             OnEnemyDeath?.Invoke(new EnemyDeathInfo(type, _enemyModelSet[type].Score));
         }
 
+        public void Visit(IEnemy enemy)
+        {
+            enemy.SubscribeOnDeath(EnemyDeathHandler);
+        }
     }
 }

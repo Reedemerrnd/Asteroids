@@ -7,13 +7,15 @@ using UnityEngine;
 
 namespace Controller
 {
-    class UIController : IController, IAwakeInitialize, IChangeGameState, IStartInitialize
+    class UIController : IController, IAwakeInitialize, IChangeGameState, IStartInitialize, IDisable
     {
         private readonly BaseUI _inGameUI;
         private readonly BaseUI _mainMenu;
         private readonly IShipModel _shipModel;
         private readonly EnemyDeathObserver _enemyDeathObserver;
         private BaseUI _currentWindow;
+        private NumberCut _numberCut = new NumberCut();
+
 
         private int _score = 0; // TODO remove from controller
 
@@ -38,9 +40,10 @@ namespace Controller
             Execute(UIState.MainMenu);
 
             _shipModel.Health.OnHealthChanged += ShowHealth;
+            _enemyDeathObserver.OnEnemyDeath += HandleEnemyDeath;
+
             var inGameUI = (_inGameUI as IInGameUI);
             inGameUI.SetHp(_shipModel.Health.Health.ToString());
-            _enemyDeathObserver.OnEnemyDeath += HandleEnemyDeath;
 
             if (_mainMenu is IMainMenu mainMenu)
             {
@@ -58,10 +61,9 @@ namespace Controller
         {
             var ui = _inGameUI as IInGameUI;
             _score += info.Score;
-            var interpreter = new NumberCut();
-            var scoreCut = interpreter.Interpret(_score);
+            var scoreCut = _numberCut.Interpret(_score);
             ui.SetScore(scoreCut);
-            scoreCut = interpreter.Interpret(info.Score);
+            scoreCut = _numberCut.Interpret(info.Score);
             ui.ShowLog($"{info.Type} killed. + {scoreCut}");
         }
 
@@ -109,6 +111,11 @@ namespace Controller
             _currentWindow.Execute();
         }
 
+        public void Disable()
+        {
+            _shipModel.Health.OnHealthChanged -= ShowHealth;
+            _enemyDeathObserver.OnEnemyDeath -= HandleEnemyDeath;
+        }
     }
 }
 

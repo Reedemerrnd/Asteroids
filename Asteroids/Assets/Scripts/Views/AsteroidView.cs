@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Asteroids.Data;
 using Asteroids.Models;
+using Asteroids.Core;
 
 namespace Asteroids.Views
 {
@@ -32,6 +33,7 @@ namespace Asteroids.Views
                 }
             }
         }
+
 
         private void Awake() => _rigidbody = GetComponent<Rigidbody2D>();
         private void OnTriggerEnter2D(Collider2D collision) => Interaction(collision);
@@ -71,6 +73,10 @@ namespace Asteroids.Views
         public void SubscribeOnDeath(Action<EnemyType> subscriber)
         {
             OnEnemyDeath += subscriber;
+        }
+        public void Activate(IVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

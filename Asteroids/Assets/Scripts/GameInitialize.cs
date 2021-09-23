@@ -1,3 +1,4 @@
+using Asteroids.Core;
 using Asteroids.Data;
 using Asteroids.Models;
 using Controller;
@@ -34,6 +35,8 @@ namespace Asteroids
             var enemyspawnModel = new EnemySpawnModel();
 
             var enemyDeathObserver = new EnemyDeathObserver(enemyModels);
+            var enemySpawnLogger = new EnemySpawnConsoleLogger();
+            var enemySpawnVisitMediator = new EnemySpawnVisitMediator(enemySpawnLogger, enemyDeathObserver);
 
             var uiFactory = new UIFactory(dataLoader);
 
@@ -42,7 +45,7 @@ namespace Asteroids
                 .Add(new UIController(uiFactory.GetInGameUI(), uiFactory.GetMainMenu(), playerModel, enemyDeathObserver))
                 .Add(new PlayerMovementController(playerView, input, playerModel))
                 .Add(new WeaponController(playerView, lockableWeapon, input))
-                .Add(new EnemySpawnController(enemyPoolSet, enemyModels, enemyspawnModel, enemyDeathObserver))
+                .Add(new EnemySpawnController(enemyPoolSet, enemyModels, enemyspawnModel, enemySpawnVisitMediator))
                 .Add(new DamageController(playerView, playerModel.Health))
                 .Add(new AbilityController(playerModel, playerView, input));
         }

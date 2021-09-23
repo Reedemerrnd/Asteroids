@@ -1,3 +1,4 @@
+using Asteroids.Core;
 using Asteroids.Data;
 using Asteroids.Models;
 using Asteroids.Views;
@@ -10,17 +11,17 @@ namespace Controller
         private IPoolSet<EnemyType> _enemyPool;
         private IEnemyModelSet _enemyModels;
         private IEnemySpawnModel _spawnModel;
-        private readonly EnemyDeathObserver _observer;
+        private readonly IVisitMediator<IEnemy> _mediator;
         private float _time;
 
 
 
-        public EnemySpawnController(IPoolSet<EnemyType> enemyPool, IEnemyModelSet enemyModels, IEnemySpawnModel spawnModel, EnemyDeathObserver observer)
+        public EnemySpawnController(IPoolSet<EnemyType> enemyPool, IEnemyModelSet enemyModels, IEnemySpawnModel spawnModel, IVisitMediator<IEnemy> mediator)
         {
             _enemyPool = enemyPool;
             _enemyModels = enemyModels;
             _spawnModel = spawnModel;
-            _observer = observer;
+            _mediator = mediator;
         }
 
         private void LaunchEnemy(EnemyType type)
@@ -31,7 +32,7 @@ namespace Controller
             var enemyView = enemy.GetComponent<IEnemy>();
             enemyView.Health = _enemyModels[enemyView.Type].Health;
             enemyView.SetDamage(_enemyModels[type].Damage);
-            enemyView.SubscribeOnDeath(_observer.EnemyDeathHandler);
+            _mediator.Activate(enemyView);
             enemy.transform.position = position;
             enemyView.Launch(Vector2.down, _enemyModels[type].Speed);
         }
@@ -39,16 +40,14 @@ namespace Controller
         private void SpawnEnemy()
         {
             var keys = _enemyModels.Keys;
-            var random = Mathf.RoundToInt(Randomize(0, keys.Length - 1));
+            var random = Mathf.RoundToInt(Random.Range(0, keys.Length ));
             LaunchEnemy(keys[random]);
         }
-
-        private float Randomize(float min, float max) => UnityEngine.Random.Range(min, max);
 
         public void AwakeInit() => _time = Time.time;
         public void Execute()
         {
-            var delay = Randomize(_spawnModel.MinDelay, _spawnModel.MaxDelay);
+            var delay = Random.Range(_spawnModel.MinDelay, _spawnModel.MaxDelay);
             if (_time + delay <= Time.time)
             {
                 for (int i = 0; i < 2; i++)

@@ -1,7 +1,7 @@
 ﻿using System;
 using Asteroids.Data;
 
-namespace Controller
+namespace Asteroids.Core
 {
     internal interface IObserver<T>
     {
