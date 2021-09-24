@@ -14,10 +14,9 @@ namespace Controller
         private readonly IShipModel _shipModel;
         private readonly EnemyDeathObserver _enemyDeathObserver;
         private BaseUI _currentWindow;
-        private NumberCut _numberCut = new NumberCut();
 
 
-        private int _score = 0; // TODO remove from controller
+        private long _score = 0; // TODO remove from controller
 
 
         public event Action<GameState> OnGameStateChanged;
@@ -61,9 +60,9 @@ namespace Controller
         {
             var ui = _inGameUI as IInGameUI;
             _score += info.Score;
-            var scoreCut = _numberCut.Interpret(_score);
+            var scoreCut = _score.CutToLiteralNumber();
             ui.SetScore(scoreCut);
-            scoreCut = _numberCut.Interpret(info.Score);
+            scoreCut = info.Score.CutToLiteralNumber();
             ui.ShowLog($"{info.Type} killed. + {scoreCut}");
         }
 
