@@ -11,7 +11,9 @@ namespace Inputs
     {
         public bool FireHold { get; }
         public float Rotation { get; }
-        public Vector2 Thrust { get; }
+        public (float, float) Thrust { get; }
+        public event Action OnAbilityOne;
+        public event Action OnAbilityTwo;
         public event Action OnLockPressed;
     }
 }

@@ -8,13 +8,17 @@ namespace Controller
     {
         private Controllers _controllers;
 
-        private void Start()
+        private void Awake()
         {
             _controllers = new Controllers();
             //Facade ?
             new GameInitialize(_controllers, PlayerShip.Base);
-            _controllers.Initialize();
+            _controllers.AwakeInitialize();
             _controllers.AddGameStateHandlers();
+        }
+        private void Start()
+        {
+            _controllers.StartInitialize();
         }
 
         private void Update()

@@ -5,7 +5,7 @@ using Inputs;
 
 namespace Controller
 {
-    class WeaponController : IController, IInitialize, IExecute, IDisable
+    class WeaponController : IController, IAwakeInitialize, IExecute, IDisable
     {
         private IShip _view;
         private IWeaponModel _weapon;
@@ -19,7 +19,7 @@ namespace Controller
         }
 
 
-        public void Init()
+        public void AwakeInit()
         {
             _input.OnLockPressed += LockWeapon;
         }

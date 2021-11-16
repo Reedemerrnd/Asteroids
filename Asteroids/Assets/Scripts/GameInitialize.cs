@@ -1,7 +1,10 @@
+using Asteroids.Core;
 using Asteroids.Data;
 using Asteroids.Models;
+using Asteroids.Core.States;
 using Controller;
 using Inputs;
+using Asteroids.Views;
 
 namespace Asteroids
 {
@@ -9,7 +12,6 @@ namespace Asteroids
     {
         public GameInitialize(Controllers controllers, PlayerShip type)
         {
-            //test
             var input = new PCInput();
 
             var dataLoader = new ScriptabeObjectDataLoader();
@@ -25,7 +27,11 @@ namespace Asteroids
             var playerView = shipFactory.GetView();
             var playerModel = shipFactory.GetModel();
 
-            var enemyFactory = new EnemyFactory(jsonLoader);
+            var shipStateHandler = new ShipStateHandler(new NormalState(new HealthyShipMovement()),
+                                                        new DamagedState(new DamagedShipMovement(0.4f)),
+                                                        new HeavilyDamagedState(new HeavilyDamagedShipMovement(0.4f, 0.3f)));
+
+            var enemyFactory = new EnemyFactory(dataLoader);
             enemyFactory.Init(EnemyType.Asteroid);
             enemyFactory.Init(EnemyType.SmallAsteroid);
 
@@ -34,14 +40,21 @@ namespace Asteroids
 
             var enemyspawnModel = new EnemySpawnModel();
 
+            var enemyDeathObserver = new EnemyDeathObserver(enemyModels);
+            var enemySpawnLogger = new EnemySpawnConsoleLogger();
+            var enemySpawnVisitMediator = new EnemySpawnVisitMediator(enemySpawnLogger, enemyDeathObserver);
+
+            var uiFactory = new UIFactory(dataLoader);
 
             controllers
+                .Add(new GamePauseController())
+                .Add(new UIController(uiFactory.GetInGameUI(), uiFactory.GetMainMenu(), playerModel, enemyDeathObserver))
                 .Add(new PlayerMovementController(playerView, input, playerModel))
                 .Add(new WeaponController(playerView, lockableWeapon, input))
-                .Add(new EnemySpawnController(enemyPoolSet,enemyModels, enemyspawnModel))
+                .Add(new EnemySpawnController(enemyPoolSet, enemyModels, enemyspawnModel, enemySpawnVisitMediator))
                 .Add(new DamageController(playerView, playerModel.Health))
-                ;
-
+                .Add(new AbilityController(playerModel, playerView, input))
+                .Add(new ShipStateController(playerView, playerModel, shipStateHandler));
         }
     }
 }

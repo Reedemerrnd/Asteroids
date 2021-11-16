@@ -1,29 +1,27 @@
-using System;
+using Asteroids.Core;
 using Asteroids.Data;
-using Asteroids.Views;
 using Asteroids.Models;
-using Asteroids;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
+using Asteroids.Views;
 using UnityEngine;
 
 namespace Controller
 {
-    public class EnemySpawnController : IController, IInitialize, IExecute
+    internal class EnemySpawnController : IController, IAwakeInitialize, IExecute
     {
         private IPoolSet<EnemyType> _enemyPool;
         private IEnemyModelSet _enemyModels;
         private IEnemySpawnModel _spawnModel;
+        private readonly IVisitMediator<IEnemy> _mediator;
         private float _time;
 
 
 
-        public EnemySpawnController(IPoolSet<EnemyType> enemyPool, IEnemyModelSet enemyModels, IEnemySpawnModel spawnModel)
+        public EnemySpawnController(IPoolSet<EnemyType> enemyPool, IEnemyModelSet enemyModels, IEnemySpawnModel spawnModel, IVisitMediator<IEnemy> mediator)
         {
             _enemyPool = enemyPool;
             _enemyModels = enemyModels;
             _spawnModel = spawnModel;
+            _mediator = mediator;
         }
 
         private void LaunchEnemy(EnemyType type)
@@ -34,29 +32,30 @@ namespace Controller
             var enemyView = enemy.GetComponent<IEnemy>();
             enemyView.Health = _enemyModels[enemyView.Type].Health;
             enemyView.SetDamage(_enemyModels[type].Damage);
-
             enemy.transform.position = position;
+
             enemyView.Launch(Vector2.down, _enemyModels[type].Speed);
+
+            _mediator.Activate(enemyView);
         }
 
         private void SpawnEnemy()
         {
             var keys = _enemyModels.Keys;
-            var random = Mathf.RoundToInt(Randomize(0, keys.Length-1));
+            var random = Mathf.RoundToInt(Random.Range(0, keys.Length ));
             LaunchEnemy(keys[random]);
         }
 
-        private float Randomize(float min, float max) => UnityEngine.Random.Range(min, max);
-
-        public void Init() => _time = Time.time;
+        public void AwakeInit() => _time = Time.time;
         public void Execute()
         {
-            var delay = Randomize(_spawnModel.MinDelay, _spawnModel.MaxDelay);
-            if(_time+delay <= Time.time)
+            var delay = Random.Range(_spawnModel.MinDelay, _spawnModel.MaxDelay);
+            if (_time + delay <= Time.time)
             {
-                SpawnEnemy();
-                SpawnEnemy();
-                SpawnEnemy();
+                for (int i = 0; i < 2; i++)
+                {
+                    SpawnEnemy();
+                }
                 _time = Time.time;
             }
         }

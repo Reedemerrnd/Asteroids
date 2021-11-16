@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Asteroids.Data;
 using Asteroids.Models;
+using Asteroids.Core;
 
 namespace Asteroids.Views
 {
@@ -13,6 +14,8 @@ namespace Asteroids.Views
         private IMoveVariant _move;
         private Rigidbody2D _rigidbody;
 
+        public event Action<EnemyType> OnEnemyDeath = delegate(EnemyType enemyType) {};
+
         public EnemyType Type => _type; 
         public int Health
         {
@@ -21,6 +24,7 @@ namespace Asteroids.Views
             {
                 if (value <= 0)
                 {
+                    OnEnemyDeath?.Invoke(Type);
                     Deactivate();
                 }
                 else
@@ -29,6 +33,7 @@ namespace Asteroids.Views
                 }
             }
         }
+
 
         private void Awake() => _rigidbody = GetComponent<Rigidbody2D>();
         private void OnTriggerEnter2D(Collider2D collision) => Interaction(collision);
@@ -53,17 +58,26 @@ namespace Asteroids.Views
 
         protected override void Deactivate()
         {
+
             _move.Stop(_rigidbody);
             base.Deactivate();
         }
         public override GameObject Clone()
         {
+            OnEnemyDeath = delegate { };
             var obj = Instantiate(gameObject);
             obj.GetComponent<AsteroidView>()._move = _move;
             return obj;
         }
 
-
+        public void SubscribeOnDeath(Action<EnemyType> subscriber)
+        {
+            OnEnemyDeath += subscriber;
+        }
+        public void Activate(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
 

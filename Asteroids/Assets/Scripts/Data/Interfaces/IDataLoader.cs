@@ -1,9 +1,9 @@
-
+using Asteroids.Views;
 
 namespace Asteroids.Data
 
 {
-    internal interface IDataLoader : IShipLoader,IWeaponLoader, IEnemyLoader
+    internal interface IDataLoader : IShipLoader,IWeaponLoader, IEnemyLoader, IUILoader
     {
 
     }

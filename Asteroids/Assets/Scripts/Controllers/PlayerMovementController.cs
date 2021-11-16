@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Controller;
-using UnityEngine;
+﻿using Asteroids.Models;
 using Asteroids.Views;
 using Inputs;
-using Asteroids.Models;
 
 namespace Controller
 {
@@ -26,12 +19,12 @@ namespace Controller
 
         public void FixedExecute()
         {
-            _playerModel.Movement.Move(_playerView.MoveComponent, _input.Thrust, _playerModel.Speed);
+            _playerView.Move( _input.Thrust, _playerModel.Speed);
         }
 
         public void Execute()
         {
-            _playerModel.Movement.Rotate(_playerView.MoveComponent.transform, _input.Rotation, _playerModel.RotationSpeed);
+            _playerView.Rotate(_input.Rotation, _playerModel.RotationSpeed);
         }
     }
 }
